@@ -24,7 +24,7 @@ export default function App() {
   // Track active screen name
   const navigationRef = React.useRef<NavigationContainerRef<any>>(null);
   const [activeScreen, setActiveScreen] = React.useState<string>('');
-  console.log('TCL ~ App ~ activeScreen:', activeScreen);
+  // console.log('TCL ~ App ~ activeScreen:', activeScreen);
 
   React.useEffect(() => {
     setTimeout(() => {
