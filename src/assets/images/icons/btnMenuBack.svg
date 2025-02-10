@@ -1,0 +1,5 @@
+<svg width="45" height="36" viewBox="0 0 45 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M0 12C0 5.37258 5.37258 0 12 0H64V36H12C5.37258 36 0 30.6274 0 24V12Z" fill="white"/>
+<rect width="23.0941" height="2.47437" rx="1.23719" transform="matrix(0.707107 -0.707107 -0.707107 -0.707107 15.7498 27)" fill="#BEBEBE"/>
+<rect x="30.33" y="27" width="23.0941" height="2.47437" rx="1.23719" transform="rotate(-135 30.33 27)" fill="#BEBEBE"/>
+</svg>

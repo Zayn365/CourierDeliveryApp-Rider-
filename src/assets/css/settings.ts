@@ -1,0 +1,70 @@
+import {StyleSheet} from 'react-native';
+
+export const settings = StyleSheet.create({
+  headerContainer: {
+    paddingTop: 20,
+    paddingHorizontal: 20,
+    backgroundColor: '#fdf2f2',
+    borderBottomWidth: 1,
+    borderBottomColor: '#ccc',
+    paddingBottom: 20,
+    borderRadius: 15,
+    borderWidth: 2,
+    borderColor: '#ddd',
+  },
+  welcomeText: {
+    fontSize: 20,
+    fontWeight: '600',
+    marginBottom: 15,
+    color: '#333',
+  },
+  statsContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+  },
+  statBox: {
+    backgroundColor: '#fff',
+    borderRadius: 8,
+    paddingVertical: 15,
+    paddingHorizontal: 15,
+    // alignItems: 'center',
+    shadowColor: '#000',
+    shadowOpacity: 0.1,
+    shadowRadius: 5,
+    shadowOffset: {width: 0, height: 2},
+    elevation: 3,
+    flex: 1,
+    marginHorizontal: 5,
+  },
+  bookingText: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  logoutBox: {justifyContent: 'center', alignItems: 'center'},
+  statLabel: {
+    fontSize: 14,
+    color: '#666',
+    marginBottom: 5,
+  },
+  statValue: {
+    fontSize: 28,
+    // fontWeight: '700',
+    color: '#000',
+  },
+  statLogout: {
+    fontSize: 22,
+    backgroundColor: '#ED1C24',
+    borderRadius: 20,
+    paddingHorizontal: 10,
+    paddingVertical: 5,
+    justifyContent: 'center',
+    // fontWeight: '700',
+    color: '#fff',
+  },
+  statLabelSmall: {
+    fontSize: 13,
+    color: '#666',
+    // marginTop: 5,
+    marginHorizontal: 15,
+  },
+});
