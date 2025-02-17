@@ -73,7 +73,7 @@ export const homeStyles = StyleSheet.create({
   },
   imageContainer: {
     flexDirection: 'row',
-    justifyContent: 'space-between',
+    // justifyContent: 'space-between',
     marginTop: 10,
     width: width * 0.6,
   },

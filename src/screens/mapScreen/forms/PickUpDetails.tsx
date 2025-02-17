@@ -15,7 +15,8 @@ import {OrderStatusEnum} from '@utils/enums/enum';
 import {callFunction} from '@utils/helper/helperFunctions';
 import {styles} from '@assets/css/activeOrders';
 import CustomIcons from '@utils/imagePaths/customSvgs';
-import {API_URL} from '@env';
+import {IMAGE_PATH} from '@env';
+
 type Props = {
   nextStep: () => void;
   packageData: any;
@@ -105,13 +106,13 @@ const PickUpDetails: React.FC<Props> = ({
                   <View style={homeStyles.imageContainer}>
                     {packageData?.OrderPhotos?.length > 0 &&
                       packageData?.OrderPhotos?.map((val: any, key: number) => {
-                        console.log(`${API_URL}${val.photoUrl}`);
                         return (
                           <Image
                             key={key}
-                            source={{uri: `${API_URL}${val.photoUrl}`}}
+                            source={{uri: `${IMAGE_PATH}${val.photoUrl}`}}
                             width={80}
                             height={80}
+                            style={{marginLeft: 10, borderRadius: 10}}
                           />
                         );
                       })}

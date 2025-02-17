@@ -2,8 +2,8 @@ import {create} from 'zustand';
 import {persist} from 'zustand/middleware';
 import {Alert} from 'react-native';
 import axios from 'axios';
-
-const apiLink = `http://api.tcsnow.com.pk/rider`;
+import {API_URL} from '@env';
+const apiLink = API_URL;
 
 const usePlaceOrder = create(
   persist(

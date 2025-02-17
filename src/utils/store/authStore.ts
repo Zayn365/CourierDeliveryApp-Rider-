@@ -2,8 +2,8 @@ import {create} from 'zustand';
 import axios from 'axios';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {Alert} from 'react-native';
-
-const apiLink = `http://api.tcsnow.com.pk/rider`;
+import {API_URL} from '@env';
+const apiLink = API_URL;
 
 interface User {
   id: number;
