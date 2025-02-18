@@ -73,6 +73,7 @@ const useMapStore = create(set => ({
       console.error('Error fetching address:', error?.response);
     }
   },
+
   fetchLonLat: async (placeid: any, destination: boolean) => {
     const data: any = await axios
       .get(
@@ -100,6 +101,7 @@ const useMapStore = create(set => ({
           },
         });
   },
+
   fetchPlaces: async (input: any) => {
     console.log(input);
     try {
@@ -122,5 +124,7 @@ const useMapStore = create(set => ({
       Alert.alert(err.message);
     }
   },
+  
 }));
+
 export default useMapStore;

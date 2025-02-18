@@ -7,6 +7,7 @@ import useAuthStore from '@utils/store/authStore';
 import ReturnShipment from '../forms/ReturnShipment';
 import CancelShipment from '../forms/CancelShipment';
 import QRCodeScannerComponent from '../components/QrCodeScanner';
+
 type Prop = {
   currentStep: number;
   nextStep: () => void;
@@ -14,6 +15,7 @@ type Prop = {
   shouldGet: boolean;
   currentOrder: any;
 };
+
 const FormRenderer: React.FC<Prop> = ({
   currentStep,
   nextStep,

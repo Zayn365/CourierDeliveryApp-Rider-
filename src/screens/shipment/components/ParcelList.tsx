@@ -11,6 +11,8 @@ import {
 } from '@utils/helper/helperFunctions';
 
 const ParcelList = ({list, refetch}: any) => {
+  // console.log();
+  
   const navigation: any = useNavigation();
   const [isRefreshing, setIsRefreshing] = useState(false);
 

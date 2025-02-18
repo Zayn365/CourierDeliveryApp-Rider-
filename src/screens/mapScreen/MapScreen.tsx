@@ -27,6 +27,7 @@ const App: React.FC = () => {
   const {getUserOrders, currentStep, setCurrentStep, orders} = data;
   const filteredOrders =
     param && orders && orders.find((val: any) => val.id === param.currentOrder);
+
   useEffect(() => {
     const interval = setInterval(() => {
       getUserOrders(token);
@@ -37,6 +38,7 @@ const App: React.FC = () => {
 
   const nextStep = () => setCurrentStep(Math.min(currentStep + 1, 8));
   const prevStep = () => setCurrentStep(Math.max(currentStep - 1, 1));
+  
   const currentIndex =
     currentStep === 2 || currentStep === 5 || currentStep === 6
       ? 3

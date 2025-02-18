@@ -46,6 +46,8 @@ export const homeStyles = StyleSheet.create({
   },
   infoSection: {
     marginBottom: 20,
+    // backgroundColor:'pink',
+    // borderRightWidth:1
   },
   title: {
     fontSize: 16,
@@ -73,15 +75,14 @@ export const homeStyles = StyleSheet.create({
   },
   imageContainer: {
     flexDirection: 'row',
-    justifyContent: 'space-between',
+    // justifyContent: 'space-between',
     marginTop: 10,
     width: width * 0.6,
   },
-
   paymentSection: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    alignItems: 'center',
+    // alignItems: 'center',
     marginBottom: 10,
   },
   payment: {

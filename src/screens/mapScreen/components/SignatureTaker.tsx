@@ -1,8 +1,9 @@
-import React, {useRef} from 'react';
+import React, {useRef, useState} from 'react';
 import {Alert, StyleSheet, View} from 'react-native';
 import SignatureScreen from 'react-native-signature-canvas';
 import CustomButton from '@components/Ui/CustomButton';
 import {SCREEN_HEIGHT} from '@utils/helper/helperFunctions';
+import useRiderStore from '@utils/store/riderStore';
 
 type Props = {
   setSubmitted: React.Dispatch<React.SetStateAction<boolean>>;
@@ -17,20 +18,34 @@ const SignatureTaker: React.FC<Props> = ({
   orderId,
   token,
 }) => {
-  console.log('🚀 ~ token:', token);
-  console.log('🚀 ~ orderId:', orderId);
+  const [loading, setLoading] = useState(false);
   const ref: any = useRef(null);
-
-  const handleSignature = (signature: string) => {
+  const uploadImages = useRiderStore(state => state.uploadImages);
+  const handleSignature = async (signature: string) => {
     // Log the base64 signature
-    console.log('Base64 Signature:', signature);
+    setLoading(true);
+    const proofData = {
+      orderId: orderId,
+      type: 'Signature',
+      base64Image: signature,
+      token: token,
+    };
 
-    // Example: Convert base64 to data URI (optional, useful for displaying)
-    const signatureURI = `data:image/png;base64,${signature}`;
-    console.log('Data URI:', signatureURI);
-
+    try {
+      const success = await uploadImages(proofData);
+      if (success) {
+        setSubmitted(true);
+      } else {
+        Alert.alert('Error', 'Failed to upload photos.');
+      }
+    } catch (error) {
+      console.error('Error uploading photos:', error);
+      Alert.alert('Error', 'An error occurred while uploading photos.');
+    } finally {
+      setLoading(false);
+    }
     // Save signature in state
-    setSign(signatureURI);
+    setSign(signature);
     setSubmitted(true);
 
     // If uploading, you can process the base64 as required (e.g., send to server)
@@ -80,6 +95,8 @@ const SignatureTaker: React.FC<Props> = ({
         />
       </View>
       <CustomButton
+        loader={loading}
+        disabled={loading}
         onPress={handleSubmit}
         customStyle={{marginBottom: 8}}
         text="Submit"

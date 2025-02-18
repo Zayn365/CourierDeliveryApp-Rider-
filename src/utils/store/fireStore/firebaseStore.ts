@@ -16,7 +16,7 @@ export const AddRiderLocation = async (
   heading: number,
 ) => {
   try {
-    const riderDoc = await riderCollection.where('userId', '==', riderId).get();
+    const riderDoc = await riderCollection.where('userId', '==', riderId).get();    
     if (!riderDoc.empty) {
       const documentId = riderDoc.docs[0].id;
       await riderCollection.doc(documentId).update({
@@ -25,7 +25,7 @@ export const AddRiderLocation = async (
         heading: heading,
         updatedAt: firestore.FieldValue.serverTimestamp(),
       });
-      console.log(`Rider location updated for ID: ${riderId}`);
+      console.log(`Rider location updated for ID  === > : ${riderId}`);
     } else {
       await riderCollection.add({
         userId: riderId,

@@ -44,10 +44,14 @@ import phoneGreen from '@assets/images/icons/phoneGreen.svg';
 import Cancel from '@assets/images/icons/cancel.svg';
 import LogoRed from '@assets/images/logos/logoRed.svg';
 import GetDirections from '@assets/images/icons/GetDirections.svg';
+// import Printer from '@assets/images/icons/printer0.png';
+const Printer = require('@assets/images/icons/printer.png');
 const pickUp = require('@assets/images/icons/CurrentNew48.png');
 const rider = require('@assets/images/icons/riderNew48.png');
 const destination = require('@assets/images/icons/destinationNew48.png');
 const file = require('@assets/images/icons/file.png');
+
+
 
 const Icons = {
   MapIcon,
@@ -100,6 +104,7 @@ const Icons = {
   file,
   EyeOpen,
   EyeClose,
+  Printer
 };
 
 export default Icons;

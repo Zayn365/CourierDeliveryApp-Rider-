@@ -2,8 +2,8 @@ import {create} from 'zustand';
 import axios from 'axios';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {Alert} from 'react-native';
-
-const apiLink = `http://api.tcsnow.com.pk/rider`;
+import {API_URL} from '@env';
+const apiLink = API_URL;
 
 interface User {
   id: number;
@@ -141,6 +141,7 @@ const useAuthStore = create<StoreState>()((set, get) => ({
       set({isLoading: false});
     }
   },
+
   verify: async (userId, otp) => {
     set({isLoading: true, error: null});
     try {
@@ -194,6 +195,7 @@ const useAuthStore = create<StoreState>()((set, get) => ({
       return false;
     }
   },
+
   forgetPassowrd: async email => {
     set({isLoading: true, error: null});
     try {
@@ -209,6 +211,7 @@ const useAuthStore = create<StoreState>()((set, get) => ({
       return false;
     }
   },
+
   verifyForgetPassword: async (email, otp, newPassword) => {
     set({isLoading: true, error: null});
     try {
@@ -228,6 +231,7 @@ const useAuthStore = create<StoreState>()((set, get) => ({
       set({isLoading: false});
     }
   },
+
   fetchUserData: async () => {
     const token = get().token;
     if (!token) return;
@@ -244,6 +248,7 @@ const useAuthStore = create<StoreState>()((set, get) => ({
       set({isLoading: false});
     }
   },
+
   saveFcmAndDeviceId: async (token, deviceId) => {
     try {
       if (token) {
@@ -263,6 +268,7 @@ const useAuthStore = create<StoreState>()((set, get) => ({
       return false;
     }
   },
+
   initializeUser: async () => {
     const token = await AsyncStorage.getItem('token');
     const user = await AsyncStorage.getItem('user');
@@ -277,6 +283,7 @@ const useAuthStore = create<StoreState>()((set, get) => ({
       });
     }
   },
+  
   logout: async (token: string) => {
     try {
       await axios
