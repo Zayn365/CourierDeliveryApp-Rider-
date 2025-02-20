@@ -177,7 +177,7 @@ const usePlaceOrder = create(
           return response.data;
         } catch (error: any) {
           console.log(error.response?.data);
-          Alert.alert('Error', error.response?.data?.message);
+          // Alert.alert('Error', error.response?.data?.message);
           throw error;
         }
       },

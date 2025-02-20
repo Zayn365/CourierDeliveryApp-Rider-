@@ -1,6 +1,6 @@
 import {Image, TouchableOpacity, View} from 'react-native';
 import {ScrollView} from 'react-native-gesture-handler';
-import React from 'react';
+import React, {useState} from 'react';
 import {homeStyles} from '@assets/css/map';
 import CustomText from '@components/Ui/CustomText';
 import Icons from '@utils/imagePaths/imagePaths';
@@ -16,6 +16,7 @@ import {callFunction} from '@utils/helper/helperFunctions';
 import {styles} from '@assets/css/activeOrders';
 import CustomIcons from '@utils/imagePaths/customSvgs';
 import {IMAGE_PATH} from '@env';
+import CustomImageModal from '@components/Ui/CustomImageModal';
 
 type Props = {
   nextStep: () => void;
@@ -29,6 +30,8 @@ const PickUpDetails: React.FC<Props> = ({
   token,
   packageData,
 }) => {
+  const [modalVisible, setModalVisible] = useState(false);
+  const [image, setImage] = useState<any[]>([]);
   const parcelType = getParcelTypeText(
     packageData?.parcelType ? packageData?.parcelType : 1,
   );
@@ -44,6 +47,11 @@ const PickUpDetails: React.FC<Props> = ({
     } catch (e: any) {
       console.log(e);
     }
+  };
+
+  const imageSet = (image: any) => {
+    setImage([image]);
+    setModalVisible(true);
   };
   return (
     <>
@@ -107,13 +115,15 @@ const PickUpDetails: React.FC<Props> = ({
                     {packageData?.OrderPhotos?.length > 0 &&
                       packageData?.OrderPhotos?.map((val: any, key: number) => {
                         return (
-                          <Image
-                            key={key}
-                            source={{uri: `${IMAGE_PATH}${val.photoUrl}`}}
-                            width={80}
-                            height={80}
-                            style={{marginLeft: 10, borderRadius: 10}}
-                          />
+                          <TouchableOpacity onPress={() => imageSet(val)}>
+                            <Image
+                              key={key}
+                              source={{uri: `${IMAGE_PATH}${val.photoUrl}`}}
+                              width={80}
+                              height={80}
+                              style={{marginLeft: 10, borderRadius: 10}}
+                            />
+                          </TouchableOpacity>
                         );
                       })}
                   </View>
@@ -259,6 +269,11 @@ const PickUpDetails: React.FC<Props> = ({
           </View>
         </ScrollView>
       </View>
+      <CustomImageModal
+        visible={modalVisible}
+        onClose={() => setModalVisible(false)}
+        images={image || []}
+      />
     </>
   );
 };

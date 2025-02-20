@@ -2,6 +2,12 @@ declare module '@env' {
   export const API_URL: string;
 }
 declare module '@env' {
+  export const GOOGLE_API: string;
+}
+declare module '@env' {
+  export const GOOGLE_API_KEY: string;
+}
+declare module '@env' {
   export const IMAGE_PATH: string;
 }
 declare module '@assets/*' {
