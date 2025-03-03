@@ -14,8 +14,10 @@ type Props = {
 };
 
 const OrderStart: React.FC<Props> = ({nextStep, packageData, token}) => {
+  
   const orderNumber = OrderIdSpliter(packageData?.id);
   const parcelType = getParcelTypeText(packageData?.parcelType);
+
   const SendLocations = () => {
     handleUpdateStatus(packageData?.id, OrderStatusEnum.OUT_FOR_PICKUP, token);
     nextStep();
@@ -23,6 +25,7 @@ const OrderStart: React.FC<Props> = ({nextStep, packageData, token}) => {
 
   return (
     <View style={homeStyles.bottomSheetContent}>
+
       <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
         <View style={homeStyles.myCube}>
           <Icons.Cube />
@@ -49,6 +52,7 @@ const OrderStart: React.FC<Props> = ({nextStep, packageData, token}) => {
           </CustomText>
         </View>
       </View>
+
       {/* PickUp Info */}
       <View style={homeStyles.myLocation}>
         <View
@@ -79,7 +83,9 @@ const OrderStart: React.FC<Props> = ({nextStep, packageData, token}) => {
           </CustomText>
         </View>
       </View>
+
       <CustomButton onPress={SendLocations} text="Start" />
+
     </View>
   );
 };

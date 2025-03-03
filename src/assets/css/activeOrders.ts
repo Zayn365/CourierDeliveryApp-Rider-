@@ -95,11 +95,12 @@ export const styles = StyleSheet.create({
     backgroundColor: '#FFF3E0',
     alignSelf: 'flex-start',
     borderRadius: 16,
-    borderColor: '#FAE7B9',
+    borderColor: '#E9B37B',
   },
   statusText: {
     fontSize: 15,
-    color: '#737B85',
+    color: '#E9B37B',
+    // color: '#737B85',
   },
   statusTextPickup: {
     fontSize: 15,

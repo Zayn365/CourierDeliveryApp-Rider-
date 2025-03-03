@@ -13,6 +13,7 @@ const {width, height} = Dimensions.get('window');
 // Export width and height
 export const SCREEN_WIDTH = width;
 export const SCREEN_HEIGHT = height;
+
 export function getOrderStatusText(status: number): string {
   switch (status) {
     case OrderStatusEnum.PENDING:
@@ -39,6 +40,7 @@ export function getOrderStatusText(status: number): string {
       return 'Unknown Status';
   }
 }
+
 export const getOrderStatusColor = (orderStatus: number) => {
   const statusColors: any = {
     [OrderStatusEnum.PENDING]: '#FFA500', // Orange
@@ -55,6 +57,7 @@ export const getOrderStatusColor = (orderStatus: number) => {
 
   return statusColors[orderStatus] || '#000000'; // Default to black if status not found
 };
+
 export function getParcelTypeText(type: number): string {
   switch (type) {
     case ParcelTypeEnum.PARCEL:
@@ -130,6 +133,7 @@ export const onShare = async (message: string) => {
     console.error('Error sharing content:', error.message);
   }
 };
+
 const formatWithCommas = (value: number | string) => {
   if (!value) return '';
   return value.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');

@@ -63,7 +63,7 @@ const OrderList = () => {
                 }}>
                 <View style={Order.card}>
                   <View style={Order.row}>
-                    <Icons.RedBox />
+                    {/* <Icons.RedBox /> */}
                     <View style={Order.iconSpacing}>
                       {/* Upper Status */}
                       <CustomText isBold={true} style={Order.statusText}>

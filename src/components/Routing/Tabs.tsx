@@ -15,6 +15,9 @@ export default function MyTabBar({state, descriptors, navigation}: any) {
       case 'Wallet': {
         return <CustomIcon.WalletIcon color={color} />;
       }
+      case 'Deposit to EasyPaisa': {
+        return <CustomIcon.Deposit color={color} />;
+      }
       case 'Settings': {
         return <CustomIcon.SettingIcon color={color} />;
       }
@@ -71,15 +74,22 @@ export default function MyTabBar({state, descriptors, navigation}: any) {
             style={{
               flex: 1,
               alignItems: 'center',
-              paddingVertical: 10,
+              // paddingVertical: 10,
+              paddingTop: 12,
+              paddingBottom:5,
               justifyContent: 'center',
               backgroundColor: '#fff',
+              borderTopWidth:0.2,
+              borderTopColor:'#9999',
             }}>
             {openIcon(route.name, isFocused ? '#ED1C24' : '#465061')}
             <CustomText
               style={{
-                color: isFocused ? '#ED1C24' : '#465061',
+                // color: isFocused ? '#ED1C24' : '#465061',
+                color: isFocused ? '#000' : '#465061',
+                fontWeight: isFocused ? 'bold': "normal",
                 textAlign: 'center',
+                paddingTop:6
               }}>
               {label}
             </CustomText>

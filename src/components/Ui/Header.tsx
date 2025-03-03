@@ -21,13 +21,22 @@ const Header: React.FC<Props> = () => {
     <>
       <LinearGradient
         colors={['#ED1C24', '#ED1C24']}
-        style={HeaderStyle.container}>
+        // style={HeaderStyle.container}
+        style={{    
+          justifyContent: 'space-between',
+          alignItems: 'center',
+          paddingHorizontal: 35,
+          paddingVertical: 10,}}
+
+        >
         {/* Logo */}
-        <View style={{marginLeft: -20}}>
+        <View style={{
+          // marginLeft: -20
+          }}>
           <Icons.Logo width={100} height={100} />
         </View>
         {/* Notification Bell Icon */}
-        <View style={HeaderStyle.availableDivider}>
+        {/* <View style={HeaderStyle.availableDivider}>
           {hasNewNotification ? (
             ''
           ) : (
@@ -39,7 +48,7 @@ const Header: React.FC<Props> = () => {
               }}
             />
           )}
-        </View>
+        </View> */}
       </LinearGradient>
     </>
   );

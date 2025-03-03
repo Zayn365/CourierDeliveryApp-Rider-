@@ -46,7 +46,7 @@ const Map: React.FC<Prop> = ({ currentStep }) => {
 
   useEffect(() => {
     if (mapRef.current && currentLocation) {
-      console.log("Delaying camera animation for 500ms:", currentLocation);
+      console.log("Delaying camera animation for 1000ms:", currentLocation);
   
       setTimeout(() => {
         mapRef.current?.animateCamera({
@@ -54,13 +54,14 @@ const Map: React.FC<Prop> = ({ currentStep }) => {
             latitude: currentLocation.latitude,
             longitude: currentLocation.longitude,
           },
-          zoom: 15,
+          zoom: 12
         });
-      }, 500);
+      }, 1000);
     }
-  }, [currentLocation]);
+  }, [currentLocation, 
+    currentStep
+  ]);
   
-
   const animatedRiderLocation = useRef(
     new AnimatedRegion({
       latitude: riderLocation?.latitude || 24.8607,
@@ -72,7 +73,11 @@ const Map: React.FC<Prop> = ({ currentStep }) => {
 
   const animatedHeading = useRef(new Animated.Value(heading || 0)).current;
 
+
   useEffect(() => {
+
+    console.log("rider location from map screen:", riderLocation);
+    
     if (riderLocation) {
       animatedRiderLocation
         .timing({
@@ -145,7 +150,9 @@ const Map: React.FC<Prop> = ({ currentStep }) => {
 
   const renderDirections = useMemo(() => {
 
-    if (!riderLocation || !destination) return null;
+    if (!riderLocation || !destination 
+      // || !mapRef.current
+    ) return null;
 
     return currentStep === 1 ? (
       <MapViewDirections
@@ -158,6 +165,7 @@ const Map: React.FC<Prop> = ({ currentStep }) => {
         strokeWidth={4}
         optimizeWaypoints={true}
         mode="DRIVING"
+        resetOnChange={false}
         onReady={result => {
           setDistance(result.distance);
           setDuration(result.duration);
@@ -177,6 +185,7 @@ const Map: React.FC<Prop> = ({ currentStep }) => {
         strokeWidth={4}
         optimizeWaypoints={true}
         mode="DRIVING"
+        resetOnChange={false}
         onReady={result => {
           setDistance(result.distance);
           setDuration(result.duration);
@@ -196,6 +205,7 @@ const Map: React.FC<Prop> = ({ currentStep }) => {
         strokeWidth={4}
         optimizeWaypoints={true}
         mode="DRIVING"
+        resetOnChange={false}
         onReady={result => {
           setDistance(result.distance);
           setDuration(result.duration);
@@ -214,7 +224,8 @@ const Map: React.FC<Prop> = ({ currentStep }) => {
     setDistance,
     setDuration,
   ]);
-  try {
+
+  // try {
   return (
     
     <MapView
@@ -225,8 +236,8 @@ const Map: React.FC<Prop> = ({ currentStep }) => {
       loadingEnabled={false}
       key={
         Platform.OS === 'android'
-          ? `${key}-${currentLocation.latitude}-${currentLocation.longitude}`
-          : 'map'
+        ? `${key}-${currentLocation.latitude}-${currentLocation.longitude}-${currentStep === 3 ? 'step3' : ''}`
+        : 'map'
       }
       customMapStyle={mapStyle}
       onRegionChangeComplete={onRegionChangeComplete} // Capture zoom & position changes
@@ -234,6 +245,7 @@ const Map: React.FC<Prop> = ({ currentStep }) => {
       // onPanDrag={onUserInteraction} // Capture rotation when dragging
       // onTouchEnd and onPanDrag commented bcz it was crashing the app
     >
+
       <Marker.Animated
         anchor={{ x: 0.1, y: 0.5 }}
         calloutAnchor={{ x: 0.5, y: 0.5 }}
@@ -269,10 +281,10 @@ const Map: React.FC<Prop> = ({ currentStep }) => {
     </MapView>
     
   );
-} catch (error) {
-  console.error("Error in Map component:", error);
-  return null;
-}
+// } catch (error) {
+//   console.error("Error in Map component:", error);
+//   return null;
+// }
 
 }
 

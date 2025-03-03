@@ -9,6 +9,7 @@ import Shipment from '../screens/shipment/Shipment';
 import Settings from '../screens/settings/Settings';
 import Home from '../screens/home/Home';
 import ParcelDetailsScreen from '@screens/parcelDetail/ParcelDetail';
+import Deposit from '@screens/deposit/Deposit';
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
@@ -32,11 +33,18 @@ const MainTabs = () => {
           tabBarLabel: 'Home',
         }}
       />
-      <Tab.Screen
+      {/* <Tab.Screen
         name="Wallet"
         component={Wallet}
         options={{
           tabBarLabel: 'Wallet',
+        }}
+      /> */}
+      <Tab.Screen
+        name="Deposit to EasyPaisa"
+        component={Deposit}
+        options={{
+          tabBarLabel: 'Deposit',
         }}
       />
       <Tab.Screen

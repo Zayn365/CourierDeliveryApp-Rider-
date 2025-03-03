@@ -55,7 +55,10 @@ const BookingLoader = () => {
             />
           </Animated.View>
         </Animated.View>
-        <CustomText style={home.statusText}>LOOKING FOR BOOKINGS</CustomText>
+        <CustomText style={{ marginTop: 40,
+    fontSize: 16,
+    // fontWeight: '500',
+    color: '#333',}}>LOOKING FOR CONSIGNMENTS</CustomText>
       </View>
     </>
   );

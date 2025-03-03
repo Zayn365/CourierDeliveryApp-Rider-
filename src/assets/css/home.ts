@@ -9,20 +9,26 @@ export const home = StyleSheet.create({
     backgroundColor: '#fff',
   },
   containerNoOrder: {flex: 1, justifyContent: 'center'},
-  customNoOrder: {textAlign: 'center', fontSize: 16, color: '#0000006e'},
+  customNoOrder: {textAlign: 'center', fontSize: 16, color: '#0000006e', marginTop:15},
   headerContainer: {
     paddingTop: 20,
     paddingHorizontal: 20,
     backgroundColor: '#fdf2f2',
     borderBottomWidth: 1,
     borderBottomColor: '#ccc',
-    paddingBottom: 20,
+    paddingBottom:20,
   },
-  welcomeText: {
-    fontSize: 20,
+  welcomeText1: {
+    fontSize: 18,
     fontWeight: '600',
     marginBottom: 15,
     color: '#333',
+  },
+  welcomeText2: {
+    fontSize: 22,
+    fontWeight: '600',
+    marginBottom: 15,
+    color: '#000',
   },
   statsContainer: {
     flexDirection: 'row',
@@ -30,8 +36,10 @@ export const home = StyleSheet.create({
   },
   statBox: {
     backgroundColor: '#fff',
-    borderRadius: 8,
-    paddingVertical: 15,
+    borderRadius: 10,
+    paddingTop: 15,
+    paddingBottom: 10,
+    // paddingVertical: 15,
     paddingHorizontal: 15,
     // alignItems: 'center',
     shadowColor: '#000',
@@ -48,13 +56,19 @@ export const home = StyleSheet.create({
   },
   statLabel: {
     fontSize: 14,
-    color: '#666',
+    color: '#9AA1AD',
     marginBottom: 5,
   },
+
   statValue: {
     fontSize: 28,
     // fontWeight: '700',
     color: '#000',
+  },
+  priceStatValue: {
+    fontSize: 28,
+    // fontWeight: '700',
+    color: 'rgba(255, 0, 0, 1)',
   },
   statLabelSmall: {
     fontSize: 13,

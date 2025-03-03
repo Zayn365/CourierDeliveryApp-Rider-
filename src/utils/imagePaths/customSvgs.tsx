@@ -1,12 +1,12 @@
 import React from 'react';
-import Svg, {Circle, Path} from 'react-native-svg';
+import Svg, { Circle, Path } from 'react-native-svg';
 type Prop = {
   color: string;
   isBg?: boolean;
   width?: number;
   height?: number;
 };
-const HomeIcon = ({color}: Prop) => (
+const HomeIcon = ({ color }: Prop) => (
   <Svg
     xmlns="http://www.w3.org/2000/svg"
     width="24"
@@ -21,7 +21,7 @@ const HomeIcon = ({color}: Prop) => (
   </Svg>
 );
 
-const LeftArrow = ({color = 'white', width = 20, height = 20}: Prop) => (
+const LeftArrow = ({ color = 'white', width = 20, height = 20 }: Prop) => (
   <Svg
     xmlns="http://www.w3.org/2000/svg"
     width={width}
@@ -37,7 +37,7 @@ const LeftArrow = ({color = 'white', width = 20, height = 20}: Prop) => (
     />
   </Svg>
 );
-const ArrowRight = ({color = 'white'}: Prop) => (
+const ArrowRight = ({ color = 'white' }: Prop) => (
   <Svg
     xmlns="http://www.w3.org/2000/svg"
     width="9"
@@ -53,7 +53,7 @@ const ArrowRight = ({color = 'white'}: Prop) => (
     />
   </Svg>
 );
-const WalletIcon = ({color}: Prop) => (
+const WalletIcon = ({ color }: Prop) => (
   <Svg
     xmlns="http://www.w3.org/2000/svg"
     width="21"
@@ -70,7 +70,7 @@ const WalletIcon = ({color}: Prop) => (
   </Svg>
 );
 
-const PackageIcon = ({color}: Prop) => (
+const PackageIcon = ({ color }: Prop) => (
   <Svg
     xmlns="http://www.w3.org/2000/svg"
     width="24"
@@ -87,7 +87,7 @@ const PackageIcon = ({color}: Prop) => (
   </Svg>
 );
 
-const SettingIcon = ({color}: Prop) => (
+const SettingIcon = ({ color }: Prop) => (
   <Svg
     xmlns="http://www.w3.org/2000/svg"
     width="25"
@@ -102,7 +102,7 @@ const SettingIcon = ({color}: Prop) => (
   </Svg>
 );
 
-const CameraIcon = ({color}: Prop) => (
+const CameraIcon = ({ color }: Prop) => (
   <Svg
     xmlns="http://www.w3.org/2000/svg"
     width="44"
@@ -116,7 +116,7 @@ const CameraIcon = ({color}: Prop) => (
   </Svg>
 );
 
-const SignatureIcon = ({color}: Prop) => (
+const SignatureIcon = ({ color }: Prop) => (
   <Svg
     xmlns="http://www.w3.org/2000/svg"
     width="34"
@@ -133,7 +133,7 @@ const SignatureIcon = ({color}: Prop) => (
     />
   </Svg>
 );
-const TickIcon = ({color}: Prop) => (
+const TickIcon = ({ color }: Prop) => (
   <Svg
     xmlns="http://www.w3.org/2000/svg"
     width="18"
@@ -147,7 +147,7 @@ const TickIcon = ({color}: Prop) => (
   </Svg>
 );
 
-const logOutIcon = ({color}: Prop) => (
+const logOutIcon = ({ color }: Prop) => (
   <Svg
     xmlns="http://www.w3.org/2000/svg"
     width="24"
@@ -163,7 +163,7 @@ const logOutIcon = ({color}: Prop) => (
     />
   </Svg>
 );
-const CallIcon = ({color, isBg = true, width = 54, height = 54}: Prop) => (
+const CallIcon = ({ color, isBg = true, width = 54, height = 54 }: Prop) => (
   <Svg
     xmlns="http://www.w3.org/2000/svg"
     width={`${width}`}
@@ -181,6 +181,16 @@ const CallIcon = ({color, isBg = true, width = 54, height = 54}: Prop) => (
   </Svg>
 );
 
+const Deposit = ({ color, isBg = true, width = 54, height = 54 }: Prop) => (
+  <Svg xmlns="http://www.w3.org/2000/svg" width="25" height="19" viewBox="0 0 25 19" fill="none">
+    <Path d="M0.999939 16.6696L1.00021 2.48123C1.00022 1.80966 1.64904 1.329 2.29148 1.52461L2.96911 1.73093C6.1699 2.7055 9.63039 2.7055 12.8312 1.73093C16.3301 0.665596 20.1291 0.767572 23.5534 2.01874L23.9999 2.18189L23.9997 17.2446C23.9996 17.4756 23.77 17.6361 23.5531 17.5569V17.5569C20.1288 16.3057 16.3298 16.2037 12.8309 17.2691C9.6301 18.2436 6.1696 18.2436 2.96881 17.2691L0.999939 16.6696Z"
+      stroke={ color} stroke-width="1.3" stroke-linejoin="round" />
+    <Path d="M15.3748 9.48821C15.3748 11.0508 14.0876 12.3176 12.4998 12.3176C10.912 12.3176 9.62483 11.0508 9.62483 9.48821C9.62483 7.92557 10.912 6.65881 12.4998 6.65881C14.0876 6.65881 15.3748 7.92557 15.3748 9.48821Z"
+      stroke={ color} stroke-width="1.3" stroke-linejoin="round" />
+  </Svg>
+
+);
+
 const CustomIcons = {
   HomeIcon,
   WalletIcon,
@@ -193,6 +203,7 @@ const CustomIcons = {
   TickIcon,
   logOutIcon,
   LeftArrow,
+  Deposit
 };
 
 export default CustomIcons;

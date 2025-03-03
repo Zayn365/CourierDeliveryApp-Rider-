@@ -15,7 +15,7 @@
 // import { callFunction } from '@utils/helper/helperFunctions';
 // import { styles } from '@assets/css/activeOrders';
 // import CustomIcons from '@utils/imagePaths/customSvgs';
-// import { API_URL } from '@env';
+// import { API_URL_DEV } from '@env';
 
 // import RNPrint from 'react-native-print';
 // import QRCode from 'react-native-qrcode-svg';
@@ -259,11 +259,11 @@
 //                   <View style={homeStyles.imageContainer}>
 //                     {packageData?.OrderPhotos?.length > 0 &&
 //                       packageData?.OrderPhotos?.map((val: any, key: number) => {
-//                         console.log(`${API_URL}${val.photoUrl}`);
+//                         console.log(`${API_URL_DEV}${val.photoUrl}`);
 //                         return (
 //                           <Image
 //                             key={key}
-//                             source={{ uri: `${API_URL}${val.photoUrl}` }}
+//                             source={{ uri: `${API_URL_DEV}${val.photoUrl}` }}
 //                             width={80}
 //                             height={80}
 //                           />
@@ -473,7 +473,7 @@ import { OrderStatusEnum } from '@utils/enums/enum';
 import { callFunction } from '@utils/helper/helperFunctions';
 import { styles } from '@assets/css/activeOrders';
 import CustomIcons from '@utils/imagePaths/customSvgs';
-import { API_URL, IMAGE_PATH } from '@env';
+import { API_URL_DEV, IMAGE_PATH } from '@env';
 import RNPrint from 'react-native-print';
 import QRCode from 'react-native-qrcode-svg';
 import { WINDOW_WIDTH } from '@gorhom/bottom-sheet';
@@ -492,6 +492,7 @@ const PickUpDetails: React.FC<Props> = ({
   token,
   packageData,
 }) => {
+  
   const [qrSvg, setQrSvg] = useState<any>(null);
   const [modalVisible, setModalVisible] = useState(false);
   const [image, setImage] = useState<any[]>([]);
@@ -499,9 +500,11 @@ const PickUpDetails: React.FC<Props> = ({
   const parcelType = getParcelTypeText(
     packageData?.parcelType ? packageData?.parcelType : 1,
   );
+
   const orderNumber = OrderIdSpliter(packageData?.id);
   const trackingNumber = packageData?.orderId;
-  const consigneeAddress = packageData?.pickUpAddress;
+  // const consigneeAddress = packageData?.pickUpAddress;
+  const consigneeAddress = packageData?.consigneeAddress;
   const name = packageData?.customer?.name;
 
   const UpdateStatus = () => {
@@ -580,7 +583,7 @@ const PickUpDetails: React.FC<Props> = ({
                 font-weight: 900;
                 text-transform: uppercase;
                 margin-top: -0.1px;
-                margin-bottom: 4px;
+                margin-bottom: 0px;
               }
       
               .content {
@@ -605,7 +608,7 @@ const PickUpDetails: React.FC<Props> = ({
       
               .order-address {
                 font-size: 9px;
-                font-weight: 700;
+                font-weight: 400;
                 line-height: 12px;
                 word-wrap: break-word;
                 overflow-wrap: break-word;
@@ -646,8 +649,7 @@ const PickUpDetails: React.FC<Props> = ({
     }
   };
 
-  console.log("PACKAGE DATA: +++++++++++++++> ", packageData);
-
+  // console.log("PACKAGE DATA: +++++++++++++++> ", packageData);
 
   return (
     <>
@@ -711,7 +713,7 @@ const PickUpDetails: React.FC<Props> = ({
                     {packageData?.OrderPhotos?.length > 0 &&
                       packageData?.OrderPhotos?.map((val: any, key: number) => {
                         return (
-                          <TouchableOpacity onPress={() => imageSet(val)}>
+                          <TouchableOpacity onPress={() => imageSet(val)}>                            
                             <Image
                               key={key}
                               source={{ uri: `${IMAGE_PATH}${val.photoUrl}` }}
@@ -745,16 +747,16 @@ const PickUpDetails: React.FC<Props> = ({
                   </View>
                   <View
                     style={
-                      packageData?.paymentType === 1
-                        ? [styles.status, styles.pickedUp]
-                        : [styles.status, styles.inProgress]
+                      packageData?.paymentType === 1 && packageData.amountReceived === 0
+                      ? [styles.status, styles.inProgress]
+                        : [styles.status, styles.pickedUp]
                     }>
                     <CustomText
                       isBold={true}
                       style={
-                        packageData?.paymentType === 1
-                          ? styles.statusTextPickup
-                          : styles.statusText
+                        packageData?.paymentType === 1 && packageData.amountReceived === 0
+                        ? styles.statusText 
+                          : styles.statusTextPickup
                       }>
                       {packageData?.paymentType === 1
                         ? 'Cash On Pickup'
@@ -792,7 +794,8 @@ const PickUpDetails: React.FC<Props> = ({
                   onPress={() => {
                     Payment(packageData?.price ? packageData?.price : 0);
                   }}
-                  customStyle={{ marginTop: 0 }}
+                  //@ts-ignore
+                  customStyle={{ marginTop: -25, backgroundColor: packageData.amountReceived ? "#4CD964": null }}
                   text={
                     packageData.amountReceived ? (
                       <View
@@ -801,10 +804,10 @@ const PickUpDetails: React.FC<Props> = ({
                           alignItems: 'center',
                           justifyContent: 'space-around',
                         }}>
-                        <CustomIcons.TickIcon color="#4CD964" />
+                        <CustomIcons.TickIcon color="#FFF" />
                         <CustomText
-                          style={{ fontSize: 17, paddingHorizontal: 5 }}>
-                          Received
+                          style={{ fontSize: 17, paddingHorizontal: 5, color: "#FFF" }}>
+                          Cash Received
                         </CustomText>
                       </View>
                     ) : (
@@ -817,7 +820,7 @@ const PickUpDetails: React.FC<Props> = ({
                         <CustomIcons.TickIcon color="#bdbdbd" />
                         <CustomText
                           style={{ fontSize: 17, paddingHorizontal: 5 }}>
-                          Cash Pick Up
+                          Received Cash?
                         </CustomText>
                       </View>
                     )

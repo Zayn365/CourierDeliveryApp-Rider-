@@ -9,7 +9,7 @@ type Props = {
   headerName: string;
 };
 
-const headerNames: String[] = ['Home', 'Wallet', 'Shipments', 'Settings'];
+const headerNames: String[] = ['Home', 'Wallet', 'Shipments', 'Settings', 'Deposit to EasyPaisa'];
 
 const HeaderOther: React.FC<Props> = ({headerName}) => {
   const navigation = useNavigation();
@@ -19,12 +19,17 @@ const HeaderOther: React.FC<Props> = ({headerName}) => {
   return (
     <LinearGradient
       colors={['#ED1C24', '#ED1C24']}
-      style={HeaderStyle.container}>
+      style={{flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        paddingHorizontal: 10,
+        paddingVertical: 10,}}>
       {/* Back Button */}
       {!canGoBack && (
         <TouchableOpacity
           onPress={() => navigation.goBack()}
-          style={{padding: 10}}>
+          style={{padding: 10}}
+          >
           <CustomIcons.LeftArrow color="white" />
         </TouchableOpacity>
       )}
@@ -41,8 +46,8 @@ const HeaderOther: React.FC<Props> = ({headerName}) => {
         {headerName}
       </Text>
 
-      <View style={{width: 24, height: 24, padding: 10}} />
-    </LinearGradient>
+{  !canGoBack &&    <View style={{width: 24, height: 24, padding: 10}} />
+}    </LinearGradient>
   );
 };
 

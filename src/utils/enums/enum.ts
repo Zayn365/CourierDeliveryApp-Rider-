@@ -15,6 +15,7 @@ export const OrderStatusEnum = Object.freeze({
 export const ParcelTypeEnum = Object.freeze({
   PARCEL: 1,
   DOCUMENT: 2,
+  DOCUMENT_FLYER: 3,
 });
 
 // Calculation Type Enum

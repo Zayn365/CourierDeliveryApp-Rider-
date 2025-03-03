@@ -73,17 +73,13 @@ import {persist} from 'zustand/middleware';
 import axios from 'axios';
 import {Alert} from 'react-native';
 // import AsyncStorage from '@react-native-async-storage/async-storage';
-import {API_URL} from '@env';
-// import AsyncStorage from '@react-native-async-storage/async-storage';
-import {API_URL} from '@env';
+import {API_URL_DEV} from '@env';
 // Define types for the store
 interface Proof {
   orderId?: number;
   type: 'Signature' | 'Proof' | string;
   images?: File[] | null;
-  images?: File[] | null;
   token: string | null | undefined;
-  base64Image?: string | undefined | null;
   base64Image?: string | undefined | null;
 }
 
@@ -122,8 +118,7 @@ const useRiderStore = create<RiderStore>()(
           }
           // console.log('TCL ~ uploadImages: ~ yo:', yo);
           const response = await axios.post(
-            `${API_URL}/order/proof-sig`,
-            `${API_URL}/order/proof-sig`,
+            `${API_URL_DEV}/order/proof-sig`,
             formData,
             {
               headers: {

@@ -21,7 +21,7 @@ const CustomImageModal = ({visible, onClose, images}: any) => {
       onRequestClose={onClose}>
       <View style={styles.modalContainer}>
         <TouchableOpacity style={styles.cancelButton} onPress={onClose}>
-          <Text style={styles.cancelText}>Cancel</Text>
+          <Text style={styles.cancelText}>Close</Text>
         </TouchableOpacity>
 
         <ScrollView contentContainerStyle={styles.imageContainer}>
