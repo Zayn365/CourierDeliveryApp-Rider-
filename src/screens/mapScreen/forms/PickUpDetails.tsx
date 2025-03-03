@@ -488,10 +488,10 @@ type Props = {
 
 const PickUpDetails: React.FC<Props> = ({
   nextStep,
-  // setCurrentStep,
   token,
   packageData,
 }) => {
+
   const [qrSvg, setQrSvg] = useState<any>(null);
   const [modalVisible, setModalVisible] = useState(false);
   const [image, setImage] = useState<any[]>([]);
@@ -653,7 +653,6 @@ const PickUpDetails: React.FC<Props> = ({
     <>
       <View style={homeStyles.ViewScrollable}>
         <ScrollView
-          // eslint-disable-next-line react-native/no-inline-styles
           contentContainerStyle={{
             paddingBottom: 50,
             flexGrow: 1,
@@ -675,11 +674,13 @@ const PickUpDetails: React.FC<Props> = ({
               </View>
             </View>
 
+
             <View style={homeStyles.card}>
               {/* Parcel Information */}
               <View style={homeStyles.infoSection}>
                 <View style={homeStyles.myLocationWithSpace}>
                   <Icons.MyLocation />
+                  <View style={{ marginLeft: 10 }}>
                   <View style={{ marginLeft: 10 }}>
                     <CustomText style={homeStyles.myLocationText}>
                       {packageData?.customer?.name}
@@ -689,10 +690,13 @@ const PickUpDetails: React.FC<Props> = ({
                     </CustomText>
                   </View>
                 </View>
+                </View>
+
 
                 {/* Delivery Info */}
                 <View style={homeStyles.deliveryLocation}>
                   <Icons.Cube />
+                  <View style={{ marginLeft: 8 }}>
                   <View style={{ marginLeft: 8 }}>
                     <CustomText style={homeStyles.myLocationText}>
                       Parcel Information
@@ -704,6 +708,8 @@ const PickUpDetails: React.FC<Props> = ({
                     </CustomText>
                   </View>
                 </View>
+                </View>
+
 
                 {/* Images (Placeholder for parcel images) */}
                 <View style={{ justifyContent: 'flex-start' }}>
@@ -732,6 +738,7 @@ const PickUpDetails: React.FC<Props> = ({
                   <View style={homeStyles.myLocationWithSpace}>
                     <Icons.Note width={20} height={20} />
                     <View style={{ marginLeft: 10 }}>
+                    <View style={{ marginLeft: 10 }}>
                       <CustomText style={homeStyles.myPaymentText}>
                         Payment
                       </CustomText>
@@ -742,7 +749,7 @@ const PickUpDetails: React.FC<Props> = ({
                           : packageData?.price}
                       </CustomText>
                     </View>
-                  </View>
+                    </View>
                   <View
                     style={
                       packageData?.paymentType === 1
@@ -761,10 +768,12 @@ const PickUpDetails: React.FC<Props> = ({
                         : 'Paid Online'}
                     </CustomText>
                   </View>
+                  </View>
                 </View>
                 <View style={[homeStyles.infoSection, { maxWidth: WINDOW_WIDTH * 0.4 }]}>
                   <View style={homeStyles.consigneeTag}>
                     <Icons.tickBoxRed width={20} height={20} />
+                    <View style={{ marginLeft: 10 }}>
                     <View style={{ marginLeft: 10 }}>
                       <CustomText style={homeStyles.myPaymentText}>
                         Consignment#
@@ -841,9 +850,6 @@ const PickUpDetails: React.FC<Props> = ({
                       marginVertical: -20
                     }}
                   />
-                  <CustomText style={homeStyles.iconText}>
-                    PRINT RECEIPT
-                  </CustomText>
                 </TouchableOpacity>
 
                 {/* Call Shipper Button */}
@@ -868,14 +874,18 @@ const PickUpDetails: React.FC<Props> = ({
                 onPress={UpdateStatus}
               />
             )}
-          </View>
-        </ScrollView>
+
+            </View>
+            </View>
+
+         </ScrollView>
       </View>
       <CustomImageModal
         visible={modalVisible}
         onClose={() => setModalVisible(false)}
         images={image || []}
       />
+
     </>
   );
 };
