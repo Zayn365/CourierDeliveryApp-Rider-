@@ -473,11 +473,10 @@ import { OrderStatusEnum } from '@utils/enums/enum';
 import { callFunction } from '@utils/helper/helperFunctions';
 import { styles } from '@assets/css/activeOrders';
 import CustomIcons from '@utils/imagePaths/customSvgs';
-import { API_URL, IMAGE_PATH } from '@env';
+import { API_URL } from '@env';
 import RNPrint from 'react-native-print';
 import QRCode from 'react-native-qrcode-svg';
 import { WINDOW_WIDTH } from '@gorhom/bottom-sheet';
-import CustomImageModal from '@components/Ui/CustomImageModal';
 
 type Props = {
   nextStep: () => void;
@@ -488,13 +487,10 @@ type Props = {
 
 const PickUpDetails: React.FC<Props> = ({
   nextStep,
-  // setCurrentStep,
   token,
   packageData,
 }) => {
   const [qrSvg, setQrSvg] = useState<any>(null);
-  const [modalVisible, setModalVisible] = useState(false);
-  const [image, setImage] = useState<any[]>([]);
 
   const parcelType = getParcelTypeText(
     packageData?.parcelType ? packageData?.parcelType : 1,
@@ -515,11 +511,6 @@ const PickUpDetails: React.FC<Props> = ({
     } catch (e: any) {
       console.log(e);
     }
-  };
-
-  const imageSet = (image: any) => {
-    setImage([image]);
-    setModalVisible(true);
   };
 
   const getQRCodeBase64 = (): Promise<string> => {
@@ -647,13 +638,12 @@ const PickUpDetails: React.FC<Props> = ({
   };
 
   console.log("PACKAGE DATA: +++++++++++++++> ", packageData);
-
+  
 
   return (
     <>
       <View style={homeStyles.ViewScrollable}>
         <ScrollView
-          // eslint-disable-next-line react-native/no-inline-styles
           contentContainerStyle={{
             paddingBottom: 50,
             flexGrow: 1,
@@ -705,21 +695,18 @@ const PickUpDetails: React.FC<Props> = ({
                   </View>
                 </View>
 
-                {/* Images (Placeholder for parcel images) */}
+                {/* Images */}
                 <View style={{ justifyContent: 'flex-start' }}>
                   <View style={homeStyles.imageContainer}>
                     {packageData?.OrderPhotos?.length > 0 &&
                       packageData?.OrderPhotos?.map((val: any, key: number) => {
                         return (
-                          <TouchableOpacity onPress={() => imageSet(val)}>
-                            <Image
-                              key={key}
-                              source={{ uri: `${IMAGE_PATH}${val.photoUrl}` }}
-                              width={80}
-                              height={80}
-                              style={{ marginLeft: 10, borderRadius: 10 }}
-                            />
-                          </TouchableOpacity>
+                          <Image
+                            key={key}
+                            source={{ uri: `${API_URL}/${val.photoUrl}` }}
+                            width={80}
+                            height={80}
+                          />
                         );
                       })}
                   </View>
@@ -762,7 +749,7 @@ const PickUpDetails: React.FC<Props> = ({
                     </CustomText>
                   </View>
                 </View>
-                <View style={[homeStyles.infoSection, { maxWidth: WINDOW_WIDTH * 0.4 }]}>
+                <View style={[homeStyles.infoSection,{maxWidth:WINDOW_WIDTH*0.4}]}>
                   <View style={homeStyles.consigneeTag}>
                     <Icons.tickBoxRed width={20} height={20} />
                     <View style={{ marginLeft: 10 }}>
@@ -824,9 +811,7 @@ const PickUpDetails: React.FC<Props> = ({
                   }
                   isWhite={true}
                 />
-              ) : (
-                ''
-              )}
+              ) : null}
 
               {/* Action Buttons */}
               <View style={homeStyles.actions}>

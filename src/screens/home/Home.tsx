@@ -183,6 +183,7 @@ const Home = () => {
   const {getUserOrders, orders} = usePlaceOrder();
   const data: any = useMapStore();
   const {fetchAddress, setRiderLocation, riderLocation, setHeading, heading} = data;  
+  
   const locationRequestRef = useRef<NodeJS.Timeout | null>(null);
   const lastRecordedLocation = useRef<any>(null);
   const [refreshing, setRefreshing] = useState(false);
