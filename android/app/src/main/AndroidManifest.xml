@@ -1,4 +1,4 @@
-<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="com.tcsnowcourier">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
@@ -10,12 +10,13 @@
 
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION" />
     <uses-permission android:name="android.permission.FOREGROUND_SERVICE"/>
+
     <uses-permission android:name="android.permission.VIBRATE" />
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS"/>
     <uses-permission android:name="android.permission.WAKE_LOCK" />
-    <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION" />
 
     <uses-permission android:name="android.permission.BLUETOOTH"/>
     <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
@@ -47,12 +48,17 @@
   <service android:name="com.supersami.foregroundservice.ForegroundService"></service> // also define android:foregroundServiceType="" according to your use case
   <service android:name="com.supersami.foregroundservice.ForegroundServiceTask"></service> // also define android:foregroundServiceType="" according to your use case
 
+  //For Android 13+ (API 33), we need to declare the foreground service type in the application
+  <service
+    android:name="com.nativelocationtracking.LocationService"    
+    android:foregroundServiceType="location" 
+  />
 
    <!-- ✅ Google Maps API Key (Keep this) -->
-      <meta-data
-            android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyDFEo2Fh44h_Um_Et4HxST5r3uxcI_Eips"
-      />
+    <meta-data
+        android:name="com.google.android.geo.API_KEY"
+        android:value="AIzaSyDFEo2Fh44h_Um_Et4HxST5r3uxcI_Eips"
+    />
       
     <!-- ✅ FCM Default Notification Icon (Separate Tag) -->
     <meta-data

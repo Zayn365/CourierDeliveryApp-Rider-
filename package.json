@@ -7,7 +7,16 @@
     "ios": "react-native run-ios",
     "lint": "eslint .",
     "start": "react-native start",
-    "test": "jest"
+    "test": "jest",
+    "generate-turbomodule": "react-native generate-turbomodule --specPath specs/NativeLocationTracking.ts --outputDir android/app/src/main/java/com/tcsnow/generated"
+  },
+  "codegenConfig":{
+    "name":"NativeLocationTracking",
+    "type":"modules",
+    "jsSrcsDir":"specs",
+    "android":{
+      "javaPackageName":"com.nativelocationtracking"
+    }
   },
   "dependencies": {
     "@gorhom/bottom-sheet": "^5.0.5",
