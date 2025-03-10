@@ -477,6 +477,7 @@ import { API_URL } from '@env';
 import RNPrint from 'react-native-print';
 import QRCode from 'react-native-qrcode-svg';
 import { WINDOW_WIDTH } from '@gorhom/bottom-sheet';
+import CustomImageModal from '@components/Ui/CustomImageModal';
 
 type Props = {
   nextStep: () => void;
@@ -492,6 +493,8 @@ const PickUpDetails: React.FC<Props> = ({
 }) => {
 
   const [qrSvg, setQrSvg] = useState<any>(null);
+  const [modalVisible, setModalVisible] = useState(false);
+  const [image, setImage] = useState<any[]>([]);
 
   const parcelType = getParcelTypeText(
     packageData?.parcelType ? packageData?.parcelType : 1,
@@ -500,6 +503,11 @@ const PickUpDetails: React.FC<Props> = ({
   const trackingNumber = packageData?.orderId;
   const consigneeAddress = packageData?.pickUpAddress;
   const name = packageData?.customer?.name;
+
+  const imageSet = (image: any) => {
+    setImage([image]);
+    setModalVisible(true);
+  };
 
   const UpdateStatus = () => {
     handleUpdateStatus(packageData?.id, OrderStatusEnum.IN_TRANSIT, token);

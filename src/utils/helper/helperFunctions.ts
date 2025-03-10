@@ -61,6 +61,8 @@ export function getParcelTypeText(type: number): string {
       return 'Parcel';
     case ParcelTypeEnum.DOCUMENT:
       return 'Document';
+    case ParcelTypeEnum.DOCUMENT_FLYER:
+        return 'Document Flyer';
     default:
       return 'Unknown Type';
   }
@@ -177,7 +179,8 @@ export function formatTime(dateString: string) {
       hour: '2-digit',
       minute: '2-digit',
       hour12: true,
-      timeZone: 'UTC',
+      // timeZone: 'UTC',
+      timeZone: 'Asia/Karachi',
     })
     .replace(/^0/, ''); // Remove leading zero from hour if present
 }
