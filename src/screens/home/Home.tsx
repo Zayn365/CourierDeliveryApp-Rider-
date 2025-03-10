@@ -831,12 +831,28 @@ const Home = () => {
   const lastRecordedLocation = useRef<any>(null);
   const locationRequestInProgress = useRef(false);
 
+    // console.log("ORDERS FROM HS ==========> : ",orders);
 
 
   const filteredOrders = useMemo(
     () => orders?.filter((val: any) => val.orderStatus <= 5 || val.orderStatus === 10) ?? [],
     [orders],
   );
+
+  // Filter orders delivered today
+// New filter for orders delivered 
+const ordersDeliveredToday = useMemo(() => {
+  const today = new Date(); // Gets current date dynamically
+  today.setHours(0, 0, 0, 0); // Set to start of current day
+  
+  return orders?.filter((val: any) => {
+    const updatedAt = new Date(val.updatedAt);
+    const isDelivered = val.orderStatus === 6; // 6 = DELIVERED
+    const isToday = updatedAt.toDateString() === today.toDateString();
+    
+    return isDelivered && isToday;
+  }) ?? [];
+}, [orders]);
 
   const updateRiderLocation = async (newLocation: { latitude: number; longitude: number }) => {
     // if (!user?.id) return;
@@ -883,11 +899,19 @@ const Home = () => {
           const deltaY = newLocation.latitude - lastRecordedLocation.current.latitude;
           const deltaX = newLocation.longitude - lastRecordedLocation.current.longitude;
 
-          if (deltaX !== 0 || deltaY !== 0) {
+          // if (deltaX !== 0 || deltaY !== 0) {
+          //   const head = Math.atan2(deltaY, deltaX) * (180 / Math.PI);
+          //   const calculatedHeading = head >= 0 ? head : head + 360;
+          //   setHeading(calculatedHeading);
+          // }
+        if (deltaX !== 0 || deltaY !== 0) {
             const head = Math.atan2(deltaY, deltaX) * (180 / Math.PI);
             const calculatedHeading = head >= 0 ? head : head + 360;
             setHeading(calculatedHeading);
+          } else {
+            setHeading((prevHeading: any) => prevHeading ?? 300);
           }
+
 
           setRiderLocation(newLocation);
 
@@ -974,7 +998,8 @@ const Home = () => {
             <CustomText style={home.statLabel}>TODAY</CustomText>
             <View style={home.bookingText}>
               <CustomText isBold={true} style={home.statValue}>
-                {filteredOrders ? filteredOrders.length : 0}
+                {/* {filteredOrders ? filteredOrders.length : 0} */}
+               {ordersDeliveredToday ? ordersDeliveredToday.length : 0}
               </CustomText>
               <View style={{}}>
                 <CustomText style={home.statLabelSmall}>Bookings</CustomText>

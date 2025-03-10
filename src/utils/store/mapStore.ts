@@ -38,7 +38,7 @@ import axios from 'axios';
 const useMapStore = create(set => ({
   places: null,
   riderLocation: {latitude: 0, longitude: 0},
-  heading: null,
+  heading: 100,
   setHeading: (heading: number) => set({heading}),
   setRiderLocation: (riderLocation: any) => set({riderLocation}),
   currentAddress: '',

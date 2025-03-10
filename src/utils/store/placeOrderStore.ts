@@ -247,9 +247,9 @@ import {create} from 'zustand';
 import {persist} from 'zustand/middleware';
 import {Alert} from 'react-native';
 import axios from 'axios';
-import {API_URL_DEV} from '@env';
+import {API_URL} from '@env';
 
-const apiLink = API_URL_DEV;
+const apiLink = API_URL;
 
 const usePlaceOrder = create(
   persist(

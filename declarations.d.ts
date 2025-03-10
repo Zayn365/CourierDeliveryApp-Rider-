@@ -1,5 +1,5 @@
 declare module '@env' {
-  export const API_URL_DEV: string;
+  export const API_URL: string;
 }
 declare module '@env' {
   export const GOOGLE_API: string;

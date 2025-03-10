@@ -32,6 +32,20 @@ export const homeStyles = StyleSheet.create({
     fontSize: 18,
     color: '#465061',
   },
+  consignmentHead: {
+    fontSize: 10,
+    color: '#757575',
+    // textAlign: 'left',
+    textAlign: 'right',
+
+  },
+  consignmentNumber: {
+    // textAlign: 'left',
+    // marginRight: 8,
+    textAlign: 'right',
+    fontSize: 14,
+    color: '#465061',
+  },
   card: {
     backgroundColor: '#EEF3FB',
     padding: 20,

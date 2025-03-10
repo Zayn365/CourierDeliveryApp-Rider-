@@ -73,7 +73,7 @@ import {persist} from 'zustand/middleware';
 import axios from 'axios';
 import {Alert} from 'react-native';
 // import AsyncStorage from '@react-native-async-storage/async-storage';
-import {API_URL_DEV} from '@env';
+import {API_URL} from '@env';
 // Define types for the store
 interface Proof {
   orderId?: number;
@@ -118,7 +118,7 @@ const useRiderStore = create<RiderStore>()(
           }
           // console.log('TCL ~ uploadImages: ~ yo:', yo);
           const response = await axios.post(
-            `${API_URL_DEV}/order/proof-sig`,
+            `${API_URL}/order/proof-sig`,
             formData,
             {
               headers: {

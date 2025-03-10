@@ -85,15 +85,22 @@ const ActiveShipment: React.FC<Props> = ({ orders }) => {
               ? [(styles.card, styles.deliveryCard)]
               : [(styles.card, styles.card)]
           }>
-          <View style={styles.row}>
+          <View
+           style={[styles.row, { marginBottom: 8 }]}>
             <View style={styles.row}>
               <Icons.Pin />
               <CustomText style={styles.label}>{Heading}</CustomText>
             </View>
-            <View>
+            {/* <View>
               <CustomText style={styles.bookingHead}>Booking #</CustomText>
               <CustomText style={styles.bookingNumber}>
                 {orderNumber}
+              </CustomText>
+            </View> */}
+            <View>
+              <CustomText style={styles.consignmentHead}>Consignment #</CustomText>
+              <CustomText style={styles.consignmentNumber}>
+                {val.orderId}
               </CustomText>
             </View>
           </View>
@@ -142,7 +149,7 @@ const ActiveShipment: React.FC<Props> = ({ orders }) => {
 
   return (
     <View style={styles.container}>
-      <CustomText style={styles.title}>ACTIVE SHIPMENT<Text style={{ fontSize: 10 }}>(<Text style={{ fontSize: 12 }}>s</Text>)</Text></CustomText>
+      <CustomText style={[styles.title,{marginBottom:4}]}>ACTIVE SHIPMENT<Text style={{ fontSize: 10 }}>(<Text style={{ fontSize: 12 }}>s</Text>)</Text></CustomText>
       {/* <CustomText style={styles.title}>ACTIVE SHIPMENT(s)</CustomText> */}
 
       <FlatList

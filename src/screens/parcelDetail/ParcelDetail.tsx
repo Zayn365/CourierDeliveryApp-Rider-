@@ -55,12 +55,14 @@ const ParcelDetailsScreen = ({route}: any) => {
             <CustomText style={styles.label}>Shipper Name</CustomText>
             <CustomText style={styles.value}>{parcel.customer.name}</CustomText>
           </View>
-          <TouchableOpacity
-            onPress={() => {
-              callFunction(parcel.customer.mobile);
-            }}>
-            <CustomIcons.CallIcon width={50} height={50} color="#4CD964" />
-          </TouchableOpacity>
+          {parcel.orderStatus != 6 &&
+            <TouchableOpacity
+              onPress={() => {
+                callFunction(parcel.customer.mobile);
+              }}>
+              <CustomIcons.CallIcon width={50} height={50} color="#4CD964" />
+            </TouchableOpacity>
+          }
         </View>
       </View>
       <View style={styles.section}>
@@ -88,12 +90,14 @@ const ParcelDetailsScreen = ({route}: any) => {
             <CustomText style={styles.label}>Consignee Name</CustomText>
             <CustomText style={styles.value}>{parcel.consigneeName}</CustomText>
           </View>
+          {parcel.orderStatus != 6 &&
           <TouchableOpacity
             onPress={() => {
               callFunction(parcel.consigneePhone);
             }}>
             <CustomIcons.CallIcon width={50} height={50} color="#4CD964" />
           </TouchableOpacity>
+          }
         </View>
       </View>
       <View style={styles.section}>

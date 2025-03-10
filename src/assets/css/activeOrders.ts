@@ -28,6 +28,17 @@ export const styles = StyleSheet.create({
     borderWidth: 1.5,
     borderColor: '#ED1C24',
   },
+  consignmentHead: {
+    fontSize: 12,
+    color: '#757575',
+  },
+  consignmentNumber: {
+    textAlign: 'right',
+    marginRight: 8,
+    fontSize: 10,
+    color: '#465061',
+    fontWeight:'bold'
+  },
   pickupCard: {
     backgroundColor: '#F5F5F5',
   },

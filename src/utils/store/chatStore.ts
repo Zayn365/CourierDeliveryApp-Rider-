@@ -3,7 +3,7 @@ import {persist} from 'zustand/middleware';
 import axios from 'axios';
 import {Alert} from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import {API_URL_DEV} from '@env';
+import {API_URL} from '@env';
 
 // Define types for the store
 interface Chat {
@@ -46,7 +46,7 @@ interface ChatStore {
   getChatByID: (token: string) => void;
 }
 
-const BASE_URL = API_URL_DEV;
+const BASE_URL = API_URL;
 const useChatStore = create<ChatStore>()(
   persist(
     (set, get) => ({

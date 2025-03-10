@@ -40,7 +40,7 @@ const App: React.FC = () => {
           currentStep === 2 || currentStep === 5 || currentStep === 6
             ? 3
             : currentStep === 4
-              ? 1
+              ? 3
               : 1;
         bottomSheetRef.current.snapToIndex(index);
         setBottomSheetPosition(index);
@@ -92,7 +92,7 @@ useEffect(() => {
     currentStep === 2 || currentStep === 5 || currentStep === 6
       ? 3
       : currentStep === 4
-        ? 1
+        ? 3
         : 1;
 
   const snapPoints = useMemo(() => ['20', '55', '55', '80'], []);

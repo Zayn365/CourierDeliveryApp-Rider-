@@ -12,7 +12,7 @@ import {
 } from 'react-native';
 
 const CustomImageModal = ({visible, onClose, images}: any) => {
-  console.log("TCL ~ CustomImageModal ~ images:", images)
+  console.log("TCL ~ CustomImageModal ~ images ~ from Modal Component :", images)
   return (
     <Modal
       animationType="slide"
