@@ -13,6 +13,8 @@ import {
 
 const CustomImageModal = ({visible, onClose, images}: any) => {
   console.log("TCL ~ CustomImageModal ~ images ~ from Modal Component :", images)
+  console.log("TCL ~ Image Path URL ~ from Modal Component :",IMAGE_PATH);
+
   return (
     <Modal
       animationType="slide"
@@ -29,7 +31,7 @@ const CustomImageModal = ({visible, onClose, images}: any) => {
             images.map((val: any, key: number) => (
               <Image
                 key={key}
-                source={{uri: `${IMAGE_PATH}${val.photoUrl}`}}
+                source={{uri: `${val.photoUrl}`}}
                 style={styles.image}
               />
             ))

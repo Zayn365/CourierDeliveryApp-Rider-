@@ -65,7 +65,7 @@ export function getParcelTypeText(type: number): string {
     case ParcelTypeEnum.DOCUMENT:
       return 'Document';
     case ParcelTypeEnum.DOCUMENT_FLYER:
-      return 'Document Flyer';
+      return 'Document (Flyer)';
     default:
       return 'Unknown Type';
   }

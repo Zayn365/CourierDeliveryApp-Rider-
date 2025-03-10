@@ -1021,6 +1021,9 @@ import { WINDOW_WIDTH } from '@gorhom/bottom-sheet';
 import CustomImageModal from '@components/Ui/CustomImageModal';
 import CountdownTimer from '../components/CountdownTimer';
 
+console.log("TCL ~ Image Path URL ~ from PickUpDetails :",IMAGE_PATH);
+
+
 type Props = {
   nextStep: () => void;
   packageData: any;
@@ -1276,7 +1279,9 @@ const PickUpDetails: React.FC<Props> = ({
                           <TouchableOpacity onPress={() => imageSet(val)}>                            
                             <Image
                               key={key}
-                              source={{ uri: `${IMAGE_PATH}${val.photoUrl}` }}
+                              // source={{ uri: `${IMAGE_PATH}${val.photoUrl}` }}
+                              source={{ uri: `${val.photoUrl}` }}
+
                               width={80}
                               height={80}
                               style={{ marginLeft: 10, borderRadius: 10 }}
