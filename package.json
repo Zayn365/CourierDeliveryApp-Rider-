@@ -7,7 +7,16 @@
     "ios": "react-native run-ios",
     "lint": "eslint .",
     "start": "react-native start",
-    "test": "jest"
+    "test": "jest",
+    "generate-turbomodule": "react-native generate-turbomodule --specPath specs/NativeLocationTracking.ts --outputDir android/app/src/main/java/com/tcsnow/generated"
+  },
+  "codegenConfig": {
+    "name": "NativeLocationTracking",
+    "type": "modules",
+    "jsSrcsDir": "specs",
+    "android": {
+      "javaPackageName": "com.nativelocationtracking"
+    }
   },
   "dependencies": {
     "@gorhom/bottom-sheet": "^5.0.5",
@@ -46,6 +55,7 @@
     "react-native-star-rating-widget": "^1.9.2",
     "react-native-svg": "^15.8.0",
     "react-native-system-navigation-bar": "^2.6.4",
+    "react-native-vector-icons": "^10.2.0",
     "react-native-view-shot": "^4.0.3",
     "react-native-webview": "^13.12.5"
   },
@@ -67,6 +77,7 @@
     "@types/axios": "^0.9.36",
     "@types/react": "^18.3.12",
     "@types/react-native": "^0.72.8",
+    "@types/react-native-vector-icons": "^6.4.18",
     "@types/react-test-renderer": "^18.0.0",
     "axios": "^1.7.7",
     "babel-jest": "^29.6.3",

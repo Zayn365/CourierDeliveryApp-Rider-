@@ -59,7 +59,7 @@ export const homeStyles = StyleSheet.create({
     elevation: 5,
   },
   infoSection: {
-    marginBottom: 20,
+    marginBottom: 15,
     // backgroundColor:'pink',
     // borderRightWidth:1
   },

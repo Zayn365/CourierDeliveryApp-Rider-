@@ -2,6 +2,7 @@ apply plugin: "com.android.application"
 apply plugin: "org.jetbrains.kotlin.android"
 apply plugin: "com.facebook.react"
 apply plugin: "com.google.gms.google-services"
+apply from: file("../../node_modules/react-native-vector-icons/fonts.gradle")
 
 /**
  * This is the configuration block to customize your React Native Android app.
@@ -113,6 +114,10 @@ dependencies {
     implementation 'com.google.firebase:firebase-analytics'
     // The version of react-native is set by the React Native Gradle Plugin
     implementation("com.facebook.react:react-android")
+
+    implementation 'com.google.android.gms:play-services-location:21.0.1' // added this for NativeLocationTracking turboModule
+    implementation 'com.google.firebase:firebase-auth:22.3.0'
+    implementation 'com.google.firebase:firebase-firestore:24.10.0'
     
     if (hermesEnabled.toBoolean()) {
         implementation("com.facebook.react:hermes-android")

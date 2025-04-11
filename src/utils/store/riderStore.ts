@@ -74,6 +74,9 @@ import axios from 'axios';
 import {Alert} from 'react-native';
 // import AsyncStorage from '@react-native-async-storage/async-storage';
 import {API_URL} from '@env';
+
+console.log("API Link From riderStore : ", API_URL );
+
 // Define types for the store
 interface Proof {
   orderId?: number;

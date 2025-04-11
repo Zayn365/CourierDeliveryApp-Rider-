@@ -5,6 +5,9 @@ import {Alert} from 'react-native';
 import {API_URL} from '@env';
 const apiLink = API_URL;
 
+console.log("API Link From authStore : ", apiLink );
+
+
 interface User {
   id: number;
   userId: string;

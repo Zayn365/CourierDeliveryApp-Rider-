@@ -250,6 +250,7 @@ import axios from 'axios';
 import {API_URL} from '@env';
 
 const apiLink = API_URL;
+console.log("API Link From placeOrderStore : ", apiLink );
 
 const usePlaceOrder = create(
   persist(
