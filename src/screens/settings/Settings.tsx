@@ -120,10 +120,12 @@ import {View, TouchableOpacity, StyleSheet} from 'react-native';
 import useAuthStore from '@utils/store/authStore';
 import useMapStore from '@utils/store/mapStore';
 import CustomIcons from '@utils/imagePaths/customSvgs';
+import { useNavigation } from '@react-navigation/native';
 
 // type Props = {};
 
 const Settings = () => {
+  const navigation=useNavigation();
   const {logout, token}: any = useAuthStore();
   // const {orders}: any = usePlaceOrder();
 
@@ -146,7 +148,7 @@ const Settings = () => {
       id: '1',
       title: 'My Profile',
       icon: <CustomIcons.ArrowRight color="#465061" />,
-      onClick: () => {},
+      onClick: () => {navigation.navigate('Profile')},
     },
     {
       id: '2',
@@ -188,6 +190,7 @@ const Settings = () => {
     </View>
   );
 };
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
