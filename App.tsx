@@ -155,6 +155,7 @@ import HeaderOther from './src/components/Ui/HeaderOther';
 import notifee, { AndroidImportance } from '@notifee/react-native';
 import SystemNavigationBar from 'react-native-system-navigation-bar';
 import useBackgroundLocationTracking from '@utils/store/useBackgroundLocationTracking';
+import { Toast, toastConfig } from '@components/Ui/CustomToast';
 
 
 export default function App() {
@@ -241,33 +242,37 @@ export default function App() {
   }, []);
 
   return (
-    <SafeAreaView style={style.safeArea}>
-      <StatusBar backgroundColor={'#ED1C24'} />
-      {!splashOn ? (
-        <SplashScreen />
-      ) : !user ? (
-        <NavigationContainer>
-          <AuthRouter />
-        </NavigationContainer>
-      ) : (
-        <NavigationContainer
-          ref={navigationRef}
-          onStateChange={() => {
-            const currentRoute: Route<string, any> | Route<string> | undefined =
-              navigationRef.current?.getCurrentRoute();
-            setActiveScreen(currentRoute?.name || '');
-          }}>
-          <GestureHandlerRootView>
-            {activeScreen === 'HomeScreen' || activeScreen === '' ? (
-              <Header />
-            ) : activeScreen !== 'Map' ? (
-              <HeaderOther headerName={activeScreen} />
-            ) : null}
-            <MainRouter />
-          </GestureHandlerRootView>
-        </NavigationContainer>
-      )}
-    </SafeAreaView>
+    <>
+      <SafeAreaView style={style.safeArea}>
+        <StatusBar backgroundColor={'#ED1C24'} />
+        {!splashOn ? (
+          <SplashScreen />
+        ) : !user ? (
+          <NavigationContainer>
+            <AuthRouter />
+          </NavigationContainer>
+        ) : (
+          <NavigationContainer
+            ref={navigationRef}
+            onStateChange={() => {
+              const currentRoute: Route<string, any> | Route<string> | undefined =
+                navigationRef.current?.getCurrentRoute();
+              setActiveScreen(currentRoute?.name || '');
+            }}>
+            <GestureHandlerRootView>
+              {activeScreen === 'HomeScreen' || activeScreen === '' ? (
+                <Header />
+              ) : activeScreen !== 'Map' ? (
+                <HeaderOther headerName={activeScreen} />
+              ) : null}
+              <MainRouter />
+            </GestureHandlerRootView>
+          </NavigationContainer>
+        )}
+      </SafeAreaView>
+      <Toast config={toastConfig} />
+    </>
+
   );
 }
 
