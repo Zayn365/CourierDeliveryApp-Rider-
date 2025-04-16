@@ -23,7 +23,7 @@ const HeaderOther: React.FC<Props> = ({headerName}) => {
         justifyContent: 'space-between',
         alignItems: 'center',
         paddingHorizontal: 10,
-        paddingVertical: 10,}}>
+        paddingVertical: !canGoBack ? 10 :18,}}>
       {/* Back Button */}
       {!canGoBack && (
         <TouchableOpacity
@@ -46,7 +46,7 @@ const HeaderOther: React.FC<Props> = ({headerName}) => {
         {headerName}
       </Text>
 
-{  !canGoBack &&    <View style={{width: 24, height: 24, padding: 10}} />
+{  !canGoBack &&    <View style={{width: 24, height: 24, padding: 10,marginRight:10}} />
 }    </LinearGradient>
   );
 };
