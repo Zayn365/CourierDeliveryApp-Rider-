@@ -10,6 +10,7 @@ import {customInput} from '@assets/css/main';
 import Icons from '@utils/imagePaths/imagePaths';
 
 type TextInputType = {
+  ref?: any;
   placeholder: string;
   value: string | number;
   readonly?: boolean;
@@ -20,9 +21,11 @@ type TextInputType = {
   style?: any;
   multiline?: boolean;
   numberOfLines?: number;
+  isEditable?: boolean;
 };
 
 const CustomInput: React.FC<TextInputType> = ({
+  ref,
   placeholder,
   value,
   setValue,
@@ -32,25 +35,38 @@ const CustomInput: React.FC<TextInputType> = ({
   style,
   multiline,
   numberOfLines,
+  isEditable,
 }) => {
   const [isFocused, setIsFocused] = useState(isFocus);
   const [isSecure, setIsSecure] = useState(secureTextEntry);
-
+  const handleInputChange = (text: string) => {
+    if (type === 'number-pad') {
+      const filteredText = text.replace(/[^0-9]/g, '');
+      if (filteredText.length <= 11) {
+        setValue?.(filteredText);
+      }
+    } else {
+      setValue?.(text);
+    }
+  };
   return (
     <View style={[customInput.container, styles.container]}>
       <TextInput
+        ref={ref}
         style={[
           isFocused
             ? {...customInput.input, ...customInput.focusedInput, ...style}
             : {...customInput.input, ...customInput.unFocusedInput, ...style},
           styles.input,
         ]}
+        editable={isEditable}
         placeholder={placeholder}
         value={value as string}
         multiline={multiline ? true : false}
         numberOfLines={numberOfLines}
         keyboardType={type}
-        onChangeText={setValue}
+        // onChangeText={setValue}
+        onChangeText={handleInputChange}
         secureTextEntry={isSecure}
         placeholderTextColor="#999"
         onFocus={() => setIsFocused(true)}
