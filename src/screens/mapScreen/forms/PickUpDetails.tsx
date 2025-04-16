@@ -23,6 +23,10 @@ import CustomImageModal from '@components/Ui/CustomImageModal';
 
 // console.log("TCL ~ Image Path URL ~ from PickUpDetails :",IMAGE_PATH);
 
+//  In the code below we are treating the 
+//  packageData?.orderId as the consignment number
+//  and packageData?.id as the order ID
+
 
 type Props = {
   nextStep: () => void;
@@ -38,6 +42,8 @@ const PickUpDetails: React.FC<Props> = ({
   packageData,
 }) => {
 
+  console.log("PACKAGE DATA: +++++++++++++++> ", packageData);
+  console.log("TOKEN: +++++++++++++++> ", token);
   const [qrSvg, setQrSvg] = useState<any>(null);
   const [modalVisible, setModalVisible] = useState(false);
   const [image, setImage] = useState<any[]>([]);
@@ -47,6 +53,9 @@ const PickUpDetails: React.FC<Props> = ({
   );
 
   const orderNumber = OrderIdSpliter(packageData?.id);
+  const orderId = packageData?.id;
+  console.log('orderID',packageData?.id);
+  
   const trackingNumber = packageData?.orderId;
   // const consigneeAddress = packageData?.pickUpAddress;
   const consigneeAddress = packageData?.consigneeAddress;
@@ -292,17 +301,25 @@ const PickUpDetails: React.FC<Props> = ({
                 </View>}
               </View>
 
-              {/* Hidden QR Code generator */}
-              <View
-              // style={{ position: 'absolute', opacity: 0, width: 0, height: 0 }}
-              style={{ marginBottom: 15 }}
-              >
+              {/* QR Code for display in the app */}
+              <View style={{ marginBottom: 15 }} >
                 <View style={{ flexDirection: 'row', alignItems: 'center', gap: 10, marginBottom: 10 }}>
                   <Icons.Cube width={20} height={20} />
                   <CustomText style={homeStyles.myPaymentText}>
                     QR Code
                   </CustomText>
                 </View>
+                <View style={{ alignSelf: 'center', marginBottom: 0 }}>
+                  <QRCode
+                    // value={orderNumber}
+                    value={JSON.stringify({ orderId, token })}
+                    size={100}
+                  />
+                </View>
+              </View>
+
+              {/* Hidden QR Code generator */}
+              <View style={{ position: 'absolute', opacity: 0, width: 0, height: 0 }}>
                 <View style={{ alignSelf: 'center', marginBottom: 0 }}>
                   <QRCode
                     value={trackingNumber}
