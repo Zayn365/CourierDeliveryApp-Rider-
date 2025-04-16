@@ -4,6 +4,11 @@ apply plugin: "com.facebook.react"
 apply plugin: "com.google.gms.google-services"
 apply from: file("../../node_modules/react-native-vector-icons/fonts.gradle")
 
+project.ext.envConfigFiles = [
+     devDebug: ".env.development",
+     devRelease: ".env.development",
+]
+
 /**
  * This is the configuration block to customize your React Native Android app.
  * By default you don't need to apply any configuration, just uncomment the lines you need.
@@ -88,6 +93,26 @@ android {
         versionName "1.0"
         missingDimensionStrategy 'react-native-camera', 'general'
     }
+
+    flavorDimensions "default"
+ 
+     productFlavors {
+         dev {
+             dimension "default"
+             applicationIdSuffix ".dev"
+             versionNameSuffix "-dev"
+         }
+         prod {
+             dimension "default"
+             versionNameSuffix "-prod"
+         }
+     }
+     googleServices {
+     disableVersionCheck = true
+     }
+
+
+
     signingConfigs {
         debug {
             storeFile file('debug.keystore')
@@ -104,7 +129,8 @@ android {
             // Caution! In production, you need to generate your own keystore file.
             // see https://reactnative.dev/docs/signed-apk-android.
             signingConfig signingConfigs.debug
-            minifyEnabled enableProguardInReleaseBuilds
+            // minifyEnabled enableProguardInReleaseBuilds
+            minifyEnabled false
             proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
         }
     }

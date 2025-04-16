@@ -8,7 +8,12 @@
     "lint": "eslint .",
     "start": "react-native start",
     "test": "jest",
-    "generate-turbomodule": "react-native generate-turbomodule --specPath specs/NativeLocationTracking.ts --outputDir android/app/src/main/java/com/tcsnow/generated"
+    "generate-turbomodule": "react-native generate-turbomodule --specPath specs/NativeLocationTracking.ts --outputDir android/app/src/main/java/com/tcsnow/generated",
+    "clean": "cd android && gradlew clean",
+    "android:dev": "cross-env ENVFILE=.env.development npx react-native run-android --mode=devDebug --appIdSuffix=dev",
+    "android:prod": "cross-env ENVFILE=.env.production npx react-native run-android --mode=devDebug --appIdSuffix=prod",
+    "assemble:android:dev": "cd android && cross-env ENVFILE=.env.development NODE_OPTIONS=--openssl-legacy-provider gradlew assembleDevRelease",
+    "assemble:android:prod": "cd android && cross-env ENVFILE=.env.production NODE_OPTIONS=--openssl-legacy-provider gradlew assembleProdRelease"
   },
   "codegenConfig": {
     "name": "NativeLocationTracking",
@@ -27,6 +32,7 @@
     "@react-navigation/native": "^7.0.14",
     "@react-navigation/native-stack": "^7.0.0",
     "@react-navigation/stack": "^7.0.0",
+    "cross-env": "^7.0.3",
     "geolib": "^3.3.4",
     "moment": "^2.30.1",
     "react": "18.3.1",
@@ -55,6 +61,7 @@
     "react-native-star-rating-widget": "^1.9.2",
     "react-native-svg": "^15.8.0",
     "react-native-system-navigation-bar": "^2.6.4",
+    "react-native-toast-message": "^2.3.0",
     "react-native-vector-icons": "^10.2.0",
     "react-native-view-shot": "^4.0.3",
     "react-native-webview": "^13.12.5"
