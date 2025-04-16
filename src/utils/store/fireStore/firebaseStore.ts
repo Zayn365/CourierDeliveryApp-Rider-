@@ -31,7 +31,7 @@ export const AddRiderLocation = async (
         userId: riderId,
         lat: latitude,
         long: longitude,
-        // heading: heading,
+        heading: heading,
         createdAt: firestore.FieldValue.serverTimestamp(),
       });
       console.log(`Rider location added for ID: ${riderId}`);
