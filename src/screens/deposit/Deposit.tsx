@@ -359,7 +359,7 @@
 // export default Deposit;
 
 import React, { useEffect, useState } from "react";
-import { View, ScrollView, TouchableOpacity, StyleSheet, Alert } from "react-native";
+import { View, ScrollView, TouchableOpacity, StyleSheet, Alert, ActivityIndicator } from "react-native";
 import DepositCard from "./components/DepositCard";
 import DepositTokenCard from "./components/DepositTokenCard";
 import CustomText from "@components/Ui/CustomText";
@@ -392,6 +392,9 @@ const Deposit = () => {
   const [isTodayVisible, setIsTodayVisible] = useState(true);
   const [isOverdueDepositVisible, setIsOverdueDepositVisible] = useState(true);
   const [authLoading, setAuthLoading] = useState(true);
+
+  console.log(todayPayments, "todayPayments");
+  
 
   useEffect(() => {
     if (token === undefined) {
@@ -450,13 +453,21 @@ const Deposit = () => {
     )
   );
 
+  // if (authLoading) {
+  //   return (
+  //     <View style={styles.loadingContainer}>
+  //       <CustomText style={styles.loadingText}>Loading authentication...</CustomText>
+  //     </View>
+  //   );
+  // }
+  
   if (authLoading) {
     return (
-      <View style={styles.loadingContainer}>
-        <CustomText style={styles.loadingText}>Loading authentication...</CustomText>
-      </View>
-    );
-  }
+       <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: '#f8f9fa' }}>
+         <ActivityIndicator size="large" color="#ED1C24" />
+       </View>
+     );
+   }
 
   return (
     <View style={styles.outerContainer}>
