@@ -45,12 +45,16 @@ import Cancel from '@assets/images/icons/cancel.svg';
 import LogoRed from '@assets/images/logos/logoRed.svg';
 import GetDirections from '@assets/images/icons/GetDirections.svg';
 import Check from '@assets/images/icons/check.svg';
+// import ProfileAvatar from '@assets/images/icons/profileAvatar.svg';
 // import Printer from '@assets/images/icons/printer0.png';
 const Printer = require('@assets/images/icons/printer.png');
 const pickUp = require('@assets/images/icons/CurrentNew48.png');
 const rider = require('@assets/images/icons/riderNew48.png');
 const destination = require('@assets/images/icons/destinationNew48.png');
 const file = require('@assets/images/icons/file.png');
+const ProfileAvatar = require('@assets/images/icons/profileAvatar2.png');
+
+
 
 
 
@@ -106,7 +110,8 @@ const Icons = {
   EyeOpen,
   EyeClose,
   Printer,
-  Check
+  Check,
+  ProfileAvatar
 };
 
 export default Icons;
