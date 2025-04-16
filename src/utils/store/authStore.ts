@@ -18,6 +18,7 @@ interface User {
   active: boolean;
   avatar: string | null;
   cnic: string | null;
+  cnicExpiry: string | null;
   createdAt: string;
   updatedAt: string;
   lastLogin: string | null;
@@ -72,6 +73,7 @@ interface StoreState {
   fetchUserData: () => Promise<void>;
   initializeUser: () => Promise<void>;
   isActive: (token: string | null, active: boolean) => Promise<boolean>;
+  updateUserInfo: (name: string) => Promise<boolean | undefined>;
   logout: (token: string) => Promise<boolean>;
 }
 
@@ -284,6 +286,41 @@ const useAuthStore = create<StoreState>()((set, get) => ({
         fcmToken,
         deviceId,
       });
+    }
+  },
+
+  updateUserInfo: async (name) => {
+    set({isLoading: true, error: null});
+    try {
+      const response: any = await axios.put(
+        `${apiLink}/profile`,
+        {
+          name,
+        },
+        {
+          headers: {
+            Authorization: get().token,
+          },
+        },
+      );
+
+      const user = response?.data?.data;
+      alert('Profile updated successfully');
+      // successToast('Profile updated successfully');
+      set({user: user});
+      await AsyncStorage.setItem('user', JSON.stringify(user));
+
+      return true;
+    } catch (error: any) {
+      const errorMessage = error.response?.data?.message || 'Signup failed.';
+      console.log(error.response?.data);
+      set({error: errorMessage});
+      set({isLoading: false});
+      alert(errorMessage);
+      // errorToast(errorMessage);
+      return false;
+    } finally {
+      set({isLoading: false});
     }
   },
   
