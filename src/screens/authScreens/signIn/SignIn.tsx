@@ -9,6 +9,7 @@ import {useNavigation} from '@react-navigation/native';
 import CustomText from '@components/Ui/CustomText';
 import useAuthStore from '@utils/store/authStore';
 import Icons from '@utils/imagePaths/imagePaths';
+import { errorToast } from '@components/Ui/CustomToast';
 
 const SignInScreen = () => {
   const [phone, setPhone] = useState('');
@@ -54,22 +55,26 @@ const SignInScreen = () => {
       console.error('Error configuring FCM:', error);
     }
   };
+  
   const onSignInPressed = async () => {
     try {
       if (!phone) {
-        Alert.alert('Error', 'Please Enter a phone number');
+        errorToast('Please Enter a phone number');
+        // Alert.alert('Error', 'Please Enter a phone number');
         return;
       }
       if (!password) {
-        Alert.alert('Error', 'Please Enter a passwords');
+        errorToast('Please Enter a passwords');
+        // Alert.alert('Error', 'Please Enter a passwords');
         return;
       }
       await login(phone, password, fcmToken);
 
       console.log('Sign In pressed');
-    } catch (error) {
-      console.error('Signup error:', error);
-      Alert.alert('Error', 'Something went wrong during signup');
+    } catch (error: any) {
+      errorToast(error);
+      // console.error('Signup error:', error);
+      // Alert.alert('Error', 'Something went wrong during signup');
     }
   };
 
@@ -88,7 +93,7 @@ const SignInScreen = () => {
         value={phone}
         setValue={setPhone}
         isFocus={false}
-        type="number-pad"
+        type="phone-pad"
       />
       <CustomInput
         placeholder="Enter your password"

@@ -11,7 +11,7 @@ const Header: React.FC<Props> = () => {
   const [hasNewNotification, sethasNewNotification] = useState(false);
 
   const {notification} = useChatStore();
-  const navigation: any = useNavigation();
+  // const navigation: any = useNavigation();
   const previousNotificationLength = useRef(notification?.length || 0);
   useEffect(() => {
     previousNotificationLength.current = notification?.length || 0;

@@ -14,7 +14,7 @@
 // };
 
 // const OrderStart: React.FC<Props> = ({nextStep, packageData, token}) => {
-  
+
 //   const orderNumber = OrderIdSpliter(packageData?.id);
 //   const parcelType = getParcelTypeText(packageData?.parcelType);
 
@@ -123,6 +123,7 @@ import CustomButton from '@components/Ui/CustomButton';
 import { getParcelTypeText, OrderIdSpliter } from '@utils/helper/helperFunctions';
 import { handleUpdateStatus } from '../helperFunctions/helper';
 import { OrderStatusEnum } from '@utils/enums/enum';
+import SliderButton from '@components/Ui/SliderButton';
 type Props = {
   nextStep: () => void;
   packageData: any;
@@ -147,8 +148,8 @@ const OrderStart: React.FC<Props> = ({ nextStep, packageData, token }) => {
       </CustomText>
 
       <View style={{}}>
-        <CustomText style={[homeStyles.bookingHead,{fontSize:12}]}>Consignment #</CustomText>
-        <CustomText isBold={true} style={[homeStyles.bookingNumber,{fontSize:16}]}>
+        <CustomText style={[homeStyles.bookingHead, { fontSize: 12 }]}>Consignment #</CustomText>
+        <CustomText isBold={true} style={[homeStyles.bookingNumber, { fontSize: 16 }]}>
           {packageData?.orderId && packageData?.orderId}
         </CustomText>
       </View>
@@ -218,6 +219,28 @@ const OrderStart: React.FC<Props> = ({ nextStep, packageData, token }) => {
       </View>
 
       <CustomButton onPress={SendLocations} text="Start" />
+      {/* <SliderButton
+        //  onSlideComplete={SendLocations} 
+        width={350}
+        height={55}
+        onSlideComplete={() => { }}
+        title="Slide to Start"
+        backgroundColor="#f0f0f0"
+        // sliderBackgroundColor='#ED1C241a'
+        // sliderBackgroundColor='#f7e1e1'
+        sliderBackgroundColor='#ED1C24'
+        sliderColor="#4CD964"
+        resetAfterSuccess={false}
+        // sliderText="Start"
+        // sliderText="→"
+        // sliderText=">"
+        titleStyle={{ color: '#555', fontWeight: 'bold', fontSize: 18,
+          //  paddingLeft: 25 
+          }}
+        sliderTextStyle={{ color: "#ED1C24", fontSize: 30, marginTop: -4, fontWeight: '400' }}
+        // successText="Payment Confirmed!"
+         /> */}
+
 
     </View>
   );

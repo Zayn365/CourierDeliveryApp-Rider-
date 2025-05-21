@@ -1,16 +1,17 @@
-import React, {useState} from 'react';
-import {View, StyleSheet, TouchableOpacity} from 'react-native';
+import React, { useState } from 'react';
+import { View, StyleSheet, TouchableOpacity } from 'react-native';
 import CustomText from '@components/Ui/CustomText';
 import CustomInput from '@components/Ui/CustomInput';
 import RadioButton from '@components/Ui/CustomRadioButton';
-import {homeStyles} from '@assets/css/map';
-import {ScrollView} from 'react-native-gesture-handler';
+import { homeStyles } from '@assets/css/map';
+import { ScrollView } from 'react-native-gesture-handler';
 import CustomButton from '@components/Ui/CustomButton';
 import CustomSmallButton from '@components/Ui/CustomSmallButton';
-import {useNavigation} from '@react-navigation/native';
-import {handleReturnOrder} from '../helperFunctions/helper';
+import { useNavigation } from '@react-navigation/native';
+import { handleReturnOrder } from '../helperFunctions/helper';
 import CustomIcons from '@utils/imagePaths/customSvgs';
-import {callFunction} from '@utils/helper/helperFunctions';
+import { callFunction } from '@utils/helper/helperFunctions';
+import usePlaceOrder from '@utils/store/placeOrderStore';
 
 interface Props {
   token: string;
@@ -18,9 +19,12 @@ interface Props {
   shipperNumber: string;
 }
 
-const ReturnShipment: React.FC<Props> = ({token, id, shipperNumber}) => {
+const ReturnShipment: React.FC<Props> = ({ token, id, shipperNumber }) => {
   const navigate = useNavigation();
-  const [selectedReason, setSelectedReason] = useState<string>('');
+  const place: any = usePlaceOrder();
+  const { setCurrentStep, currentStep, selectedReason, setSelectedReason } = place;
+  // const { setCurrentStep, currentStep } = place;
+  // const [selectedReason, setSelectedReason] = useState<string>('');
   const [otherReason, setOtherReason] = useState<string>('');
   const [selected, setSelected] = useState<string>('Shipper');
   const reasons = [
@@ -33,6 +37,8 @@ const ReturnShipment: React.FC<Props> = ({token, id, shipperNumber}) => {
   console.log('🚀 ~ numberToCall:', numberToCall);
   const handleReasonSelect = (reason: string) => {
     setSelectedReason(reason);
+    console.log('🚀 ~ handleReasonSelect ~ reason:', selectedReason);
+
     if (reason !== 'Other') {
       setOtherReason('');
     }
@@ -43,8 +49,11 @@ const ReturnShipment: React.FC<Props> = ({token, id, shipperNumber}) => {
       selectedReason && selectedReason.toLowerCase() === 'other'
         ? otherReason
         : selectedReason;
-    await handleReturnOrder(id, reason, token);
-    navigate.goBack();
+    await setSelectedReason(reason);
+    console.log('🚀 ~ UpdateStatus ~ reason:', reason);
+    console.log('🚀 ~ UpdateStatus ~ ReturnReason:', selectedReason);
+    //  await handleReturnOrder(id, reason, token);
+    setCurrentStep(67);
   };
 
   return (
@@ -54,10 +63,12 @@ const ReturnShipment: React.FC<Props> = ({token, id, shipperNumber}) => {
         contentContainerStyle={{
           paddingBottom: 50,
           flexGrow: 1,
+          width: '100%',
+          // backgroundColor: 'red',
         }}
         showsVerticalScrollIndicator={false}
         keyboardShouldPersistTaps="handled">
-        <View style={styles.upperStyle}>
+        <View style={[styles.upperStyle]}>
           <CustomText isBold={true} style={homeStyles.heading}>
             Return Shipment
           </CustomText>
@@ -70,7 +81,7 @@ const ReturnShipment: React.FC<Props> = ({token, id, shipperNumber}) => {
             </TouchableOpacity>
           </View>
         </View>
-        <View style={homeStyles.switchBtn}>
+        {/* <View style={homeStyles.switchBtn}>
           <CustomSmallButton
             label="Shipper"
             isActive={selected === 'Shipper'}
@@ -81,7 +92,7 @@ const ReturnShipment: React.FC<Props> = ({token, id, shipperNumber}) => {
             isActive={selected === 'Operations'}
             onPress={() => setSelected('Operations')}
           />
-        </View>
+        </View> */}
         <View style={styles.container}>
           {/* Content */}
           <View style={styles.content}>
@@ -102,14 +113,18 @@ const ReturnShipment: React.FC<Props> = ({token, id, shipperNumber}) => {
             </View>
 
             {/* Input for "Other" */}
-            <CustomInput
-              style={styles.input}
-              multiline={true}
-              numberOfLines={4}
-              placeholder="Enter reason for return"
-              value={otherReason}
-              setValue={setOtherReason}
-            />
+            {selectedReason === 'Other' &&
+              (
+                <CustomInput
+                  style={styles.input}
+                  multiline={true}
+                  numberOfLines={4}
+                  placeholder="Enter reason for return"
+                  value={otherReason}
+                  setValue={setOtherReason}
+                />
+              )
+            }
           </View>
         </View>
         {/* Finish Button */}
@@ -117,7 +132,9 @@ const ReturnShipment: React.FC<Props> = ({token, id, shipperNumber}) => {
           disabled={!selectedReason}
           //   loader={isLoading}
           onPress={UpdateStatus}
-          text="Finish Delivery"
+          // text="Finish Delivery"
+          // onPress={setCurrentStep(67)}
+          text="Proceed to Return Shipment"
         />
       </ScrollView>
     </View>
@@ -148,7 +165,7 @@ const styles = StyleSheet.create({
     padding: 5,
   },
 
-  callShipper: {marginBottom: 20, marginLeft: 20, color: '#76777C'},
+  callShipper: { marginBottom: 20, marginLeft: 20, color: '#76777C' },
   tabInactive: {
     backgroundColor: '#f2f2f2',
     padding: 10,

@@ -1,8 +1,11 @@
 import React from 'react';
-import { StyleSheet, View, ScrollView, TouchableOpacity } from 'react-native';
+import { StyleSheet, View, ScrollView, TouchableOpacity, Text } from 'react-native';
 import CustomText from '@components/Ui/CustomText';
 import {
   callFunction,
+  formatDate,
+  formatTime,
+  formatTime2,
   getOrderStatusColor,
   getOrderStatusText,
   getParcelTypeText,
@@ -14,25 +17,60 @@ const ParcelDetailsScreen = ({ route }: any) => {
   const styling = {
     color: `${getOrderStatusColor(parcel.orderStatus)}`,
     fontSize: 16,
+    fontWeight: '600',
   };
 
   console.log('PARCEL DETAILS LIST:', parcel);
 
   return (
     <ScrollView contentContainerStyle={styles.container}>
-      <View style={styles.section}>
+      {/* <View style={styles.section}>
         <CustomText style={styles.label}>Booking ID</CustomText>
         <CustomText style={styles.value}>
           {OrderIdSpliter(parcel.id)}
         </CustomText>
+      </View> */}
+
+      <View style={styles.section}>
+        <CustomText style={styles.label}>Consignment Number</CustomText>
+        <CustomText style={styles.value}>
+          {parcel.orderId ? parcel.orderId : 'Not Available'}
+        </CustomText>
       </View>
 
       <View style={styles.section}>
-        <CustomText style={styles.label}>Booking Status</CustomText>
-        <CustomText style={styling}>
-          {getOrderStatusText(parcel.orderStatus)}
+        {/* <CustomText style={styles.label}>Booking Status</CustomText> */}
+        <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}>
+          <Text style={[styles.label,{}]}>Consignment Delivery Status</Text>
+          {parcel?.orderStatus && [6, 7, 11].includes(parcel.orderStatus) &&<CustomText style={[styles.value,{color: `${getOrderStatusColor(parcel.orderStatus)}`,fontSize: 14}]}>
+            {formatDate(parcel.updatedAt)}
+          </CustomText>}
+        </View>
+
+        <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}>
+          {/* @ts-ignore */}
+          <Text style={styling}>
+            {getOrderStatusText(parcel.orderStatus)}
+          </Text>
+          {parcel?.orderStatus && [6, 7, 11].includes(parcel.orderStatus) &&<CustomText style={[styles.value,{color: `${getOrderStatusColor(parcel.orderStatus)}`,fontSize: 12}]}>
+            {formatTime2(parcel.updatedAt)}
+          </CustomText>}
+        </View>
+      </View>
+
+      <View style={styles.section}>
+        <CustomText style={styles.label}>Consignment Booking Time</CustomText>
+        <CustomText style={styles.value}>
+          {formatDate(parcel.createdAt)} / {formatTime(parcel.createdAt)}
         </CustomText>
       </View>
+
+      {/* <View style={styles.section}>
+        <CustomText style={styles.label}>Consignment Delivery Time</CustomText>
+        <CustomText style={styles.value}>
+          {formatDate(parcel.updatedAt)} / {formatTime2(parcel.updatedAt)}
+        </CustomText>
+      </View> */}
 
       <View style={styles.section}>
         <CustomText style={styles.label}>Parcel Type</CustomText>
@@ -47,12 +85,6 @@ const ParcelDetailsScreen = ({ route }: any) => {
         </View>
       )}
       <View style={styles.section}>
-        <CustomText style={styles.label}>Consignment Number</CustomText>
-        <CustomText style={styles.value}>
-          {parcel.orderId ? parcel.orderId : 'Not Available'}
-        </CustomText>
-      </View>
-      <View style={styles.section}>
         <View style={styles.sectionRow}>
           <View style={styles.column}>
             <CustomText style={styles.label}>Shipper Name</CustomText>
@@ -62,10 +94,10 @@ const ParcelDetailsScreen = ({ route }: any) => {
               <CustomText style={styles.value}>{parcel.customer.name}</CustomText>
             }
           </View>
-          {parcel.orderStatus != 6 &&
+          {parcel.orderStatus != 6 && parcel.orderStatus != 7 &&
             <TouchableOpacity
               onPress={() => {
-                callFunction(parcel.customer.role === "express-agent" ? parcel.senderPhone :parcel.customer.mobile);
+                callFunction(parcel.customer.role === "express-agent" ? parcel.senderPhone : parcel.customer.mobile);
               }}>
               <CustomIcons.CallIcon width={50} height={50} color="#4CD964" />
             </TouchableOpacity>
@@ -74,9 +106,9 @@ const ParcelDetailsScreen = ({ route }: any) => {
       </View>
       <View style={styles.section}>
         <CustomText style={styles.label}>Shipper Address</CustomText>
-        {parcel.customer.role === "express-agent" ? 
-        <CustomText style={styles.valueAddress}> {parcel.senderAddress} </CustomText> :
-        <CustomText style={styles.valueAddress}> {parcel.pickUpAddress} </CustomText>
+        {parcel.customer.role === "express-agent" ?
+          <CustomText style={styles.valueAddress}>{parcel.senderAddress} </CustomText> :
+          <CustomText style={styles.valueAddress}>{parcel.pickUpAddress} </CustomText>
         }
       </View>
       <View style={styles.section}>
@@ -98,7 +130,7 @@ const ParcelDetailsScreen = ({ route }: any) => {
             <CustomText style={styles.label}>Consignee Name</CustomText>
             <CustomText style={styles.value}>{parcel.consigneeName}</CustomText>
           </View>
-          {parcel.orderStatus != 6 &&
+          {parcel.orderStatus != 6 && parcel.orderStatus != 7 &&
             <TouchableOpacity
               onPress={() => {
                 callFunction(parcel.consigneePhone);

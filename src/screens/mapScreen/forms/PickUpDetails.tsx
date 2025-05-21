@@ -20,6 +20,7 @@ import RNPrint from 'react-native-print';
 import QRCode from 'react-native-qrcode-svg';
 import { WINDOW_WIDTH } from '@gorhom/bottom-sheet';
 import CustomImageModal from '@components/Ui/CustomImageModal';
+import CustomModal from '@components/Ui/CustomModal';
 
 // console.log("TCL ~ Image Path URL ~ from PickUpDetails :",IMAGE_PATH);
 
@@ -42,8 +43,9 @@ const PickUpDetails: React.FC<Props> = ({
   packageData,
 }) => {
 
-  console.log("PACKAGE DATA: +++++++++++++++> ", packageData);
-  console.log("TOKEN: +++++++++++++++> ", token);
+  // console.log("PACKAGE DATA: +++++++++++++++> ", packageData);
+  // console.log("TOKEN: +++++++++++++++> ", token);
+  const [cashModalVisible, setCashModalVisible] = useState(false);
   const [qrSvg, setQrSvg] = useState<any>(null);
   const [modalVisible, setModalVisible] = useState(false);
   const [image, setImage] = useState<any[]>([]);
@@ -54,8 +56,8 @@ const PickUpDetails: React.FC<Props> = ({
 
   const orderNumber = OrderIdSpliter(packageData?.id);
   const orderId = packageData?.id;
-  console.log('orderID',packageData?.id);
-  
+  // console.log('orderID',packageData?.id);
+
   const trackingNumber = packageData?.orderId;
   // const consigneeAddress = packageData?.pickUpAddress;
   const consigneeAddress = packageData?.consigneeAddress;
@@ -383,9 +385,10 @@ const PickUpDetails: React.FC<Props> = ({
               {packageData?.paymentType === 1 ? (
                 <CustomButton
                   disabled={packageData.amountReceived ? true : false}
-                  onPress={() => {
-                    Payment(packageData?.price ? packageData?.price : 0);
-                  }}
+                  // onPress={() => {
+                  //   Payment(packageData?.price ? packageData?.price : 0);
+                  // }}
+                  onPress={() => setCashModalVisible(true)}
                   //@ts-ignore
                   customStyle={{
                     marginTop: -10,
@@ -473,6 +476,16 @@ const PickUpDetails: React.FC<Props> = ({
         visible={modalVisible}
         onClose={() => setModalVisible(false)}
         images={image || []}
+      />
+      <CustomModal
+        title="Confirm Cash Received?"
+        visible={cashModalVisible}
+        onYesPress={() => {
+          Payment(packageData?.price ? packageData?.price : 0);
+          setCashModalVisible(false);
+        }}
+        onNoPress={() => setCashModalVisible(false)}
+        onClosePress={() => setCashModalVisible(false)}
       />
     </>
   );

@@ -7,6 +7,8 @@ import useAuthStore from '@utils/store/authStore';
 import ReturnShipment from '../forms/ReturnShipment';
 import CancelShipment from '../forms/CancelShipment';
 import QRCodeScannerComponent from '../components/QrCodeScanner';
+import ProofOfReturn from '../forms/ProofOfReturn';
+import FeedbackScreen from '../forms/Feedback';
 
 type Prop = {
   currentStep: number;
@@ -23,7 +25,7 @@ const FormRenderer: React.FC<Prop> = ({
   currentOrder,
 }) => {
   // console.log('TCL ~ currentOrder:', currentOrder);
-  const {token}: any = useAuthStore();
+  const { token }: any = useAuthStore();
 
   switch (currentStep) {
     case 1:
@@ -57,8 +59,12 @@ const FormRenderer: React.FC<Prop> = ({
     case 4:
       return (
         <>
-          <ProofOfDelivery data={currentOrder} packageData={currentOrder} />
+          <ProofOfDelivery data={currentOrder} packageData={currentOrder} setCurrentStep={setCurrentStep} />
         </>
+      );
+    case 5:
+      return (
+        <FeedbackScreen orderId={currentOrder && currentOrder?.id} />
       );
     case 55:
       return (
@@ -71,6 +77,12 @@ const FormRenderer: React.FC<Prop> = ({
           token={token}
           shipperNumber={currentOrder?.customer?.mobile}
         />
+      );
+    case 67:
+      return (
+        <>
+          <ProofOfReturn data={currentOrder} packageData={currentOrder} />
+        </>
       );
     case 77:
       return (

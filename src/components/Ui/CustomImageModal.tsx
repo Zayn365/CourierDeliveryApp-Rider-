@@ -12,7 +12,7 @@ import {
 } from 'react-native';
 
 const CustomImageModal = ({visible, onClose, images}: any) => {
-  console.log("TCL ~ CustomImageModal ~ images ~ from Modal Component :", images)
+  // console.log("TCL ~ CustomImageModal ~ images ~ from Modal Component :", images)
   // console.log("TCL ~ Image Path URL ~ from Modal Component :",IMAGE_PATH);
 
   return (

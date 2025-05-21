@@ -7,6 +7,7 @@ import Bubbles from '@assets/images/bgImages/bubbles.svg';
 import {useNavigation} from '@react-navigation/native';
 import CustomText from '@components/Ui/CustomText';
 import useAuthStore from '@utils/store/authStore';
+import { errorToast } from '@components/Ui/CustomToast';
 
 const ForgetPassword = () => {
   const [email, setEmail] = useState('');
@@ -20,12 +21,14 @@ const ForgetPassword = () => {
           navigation.navigate('Verify', {email: email, type: 'passwordchange'});
         }
       } catch (error) {
-        console.error('FogetPassword error:', error);
-        Alert.alert('Error', 'Something went wrong');
+        errorToast('Something went wrong');
+        // console.error('FogetPassword error:', error);
+        // Alert.alert('Error', 'Something went wrong');
       }
     } catch (error) {
-      console.error('Signup error:', error);
-      Alert.alert('Error', 'Something went wrong');
+      errorToast('Something went wrong');
+      // console.error('Signup error:', error);
+      // Alert.alert('Error', 'Something went wrong');
     }
   };
 
@@ -43,7 +46,7 @@ const ForgetPassword = () => {
         value={email}
         setValue={setEmail}
         isFocus={false}
-        type="number-pad"
+        type="phone-pad"
       />
       <CustomButton
         disabled={isLoading || !email}

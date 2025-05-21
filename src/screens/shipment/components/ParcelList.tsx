@@ -8,6 +8,7 @@ import {
   OrderIdSpliter,
   getOrderStatusText,
   getOrderStatusColor,
+  formatTime2,
 } from '@utils/helper/helperFunctions';
 
 const ParcelList = ({list, refetch}: any) => {
@@ -31,7 +32,8 @@ const ParcelList = ({list, refetch}: any) => {
       <View style={styles.itemContainer}>
         <View>
           <CustomText isBold={true} style={styles.idText}>
-            {OrderIdSpliter(item.id)}
+            {/* {OrderIdSpliter(item.id)} */}
+            {item?.orderId}
           </CustomText>
           <View style={styles.statusContainer}>
             <CustomText
@@ -45,10 +47,10 @@ const ParcelList = ({list, refetch}: any) => {
         </View>
         <View>
           <CustomText style={styles.dateText}>
-            {formatDate(item.createdAt)}
+            {item.orderStatus === 2 ? formatDate(item.createdAt) : formatDate(item.updatedAt)} 
           </CustomText>
           <CustomText style={styles.timeText}>
-            {formatTime(item.createdAt)}
+             {item.orderStatus === 2 ? formatTime(item.createdAt) : formatTime2(item.updatedAt)}
           </CustomText>
         </View>
       </View>
@@ -67,7 +69,7 @@ const ParcelList = ({list, refetch}: any) => {
       }
       ListEmptyComponent={
         <View style={styles.emptyContainer}>
-          <CustomText isBold style={styles.emptyText}>
+          <CustomText style={styles.emptyText}>
             No orders found
           </CustomText>
         </View>
@@ -87,6 +89,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     height: 300, // Adjust based on design
+    marginTop: -20,
   },
   emptyText: {
     fontSize: 18,

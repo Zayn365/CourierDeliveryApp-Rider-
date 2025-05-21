@@ -8,8 +8,8 @@ export const home = StyleSheet.create({
     flex: 1,
     backgroundColor: '#fff',
   },
-  containerNoOrder: {flex: 1, justifyContent: 'center'},
-  customNoOrder: {textAlign: 'center', fontSize: 16, color: '#0000006e', marginTop:15},
+  containerNoOrder: {flex: 1, justifyContent: 'center', alignItems: 'center', marginTop: 50},
+  customNoOrder: {textAlign: 'center', fontSize: 16, color: '#0000006e', marginTop:0},
   headerContainer: {
     paddingTop: 20,
     paddingHorizontal: 20,

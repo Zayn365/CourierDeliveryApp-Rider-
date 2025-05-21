@@ -4,23 +4,24 @@ import { homeStyles } from '@assets/css/map';
 import { ScrollView } from 'react-native-gesture-handler';
 import CustomText from '@components/Ui/CustomText';
 import CustomIcons from '@utils/imagePaths/customSvgs';
-import AddDeliveryPhotos from '../components/AddDeliveryPhotos';
 import SignatureTaker from '../components/SignatureTaker';
 import useAuthStore from '@utils/store/authStore';
 import { useNavigation } from '@react-navigation/native';
 import CustomButton from '@components/Ui/CustomButton';
-import { handleUpdateStatus } from '../helperFunctions/helper';
+import { handleReturnOrder, handleUpdateStatus } from '../helperFunctions/helper';
 import { OrderStatusEnum } from '@utils/enums/enum';
 import CountdownTimer from '../components/CountdownTimer';
+import AddReturnPhotos from '../components/AddReturnPhotos';
+import usePlaceOrder from '@utils/store/placeOrderStore';
 
 type Props = {
   data?: any;
   packageData?: any;
-  setCurrentStep: React.Dispatch<React.SetStateAction<number>>;
 };
 
-const ProofOfDelivery: React.FC<Props> = ({ data, packageData,setCurrentStep }) => {
+const ProofOfReturn: React.FC<Props> = ({ data, packageData }) => {
   const { token }: any = useAuthStore();
+  const { selectedReason }: any = usePlaceOrder();
   const [imageUri, setImageUri] = React.useState<any[]>([]);
   const [submitted, setSubmitted] = React.useState<boolean>(true);
   const [signatureSubmit, setSignatureSubmit] = React.useState<boolean>(true);
@@ -39,9 +40,9 @@ const ProofOfDelivery: React.FC<Props> = ({ data, packageData,setCurrentStep }) 
   };
   const UpdateStatus = async () => {
     //  nextStep();
-    await handleUpdateStatus(packageData?.id, OrderStatusEnum.DELIVERED, token);
-    setCurrentStep(5);
-    // navigate.goBack();
+    // await handleUpdateStatus(packageData?.id, OrderStatusEnum.RETURNED, token);
+    await handleReturnOrder(packageData?.id, selectedReason, token);
+    navigate.goBack();
   };
   return (
     <View style={homeStyles.ViewScrollable}>
@@ -61,17 +62,17 @@ const ProofOfDelivery: React.FC<Props> = ({ data, packageData,setCurrentStep }) 
           }
           ]}>
             <CustomText isBold={true} style={[homeStyles.heading, { marginBottom: 8 }]}>
-              Record proof of delivery
+              Record proof of Return
             </CustomText>
-            
-          {  packageData?.pickUpTime &&
+
+            {/* {  packageData?.pickUpTime &&
             <View style={{ alignSelf: 'flex-end' , marginRight:15,marginBottom: 4}}>
               <CustomText style={{ fontSize: 12, color: '#757575', textAlign: 'left' }}>
                 Remaining Time
               </CustomText>
               <CountdownTimer backendTime={packageData?.pickUpTime} />
             </View>
-           } 
+           }  */}
 
           </View>
 
@@ -122,7 +123,7 @@ const ProofOfDelivery: React.FC<Props> = ({ data, packageData,setCurrentStep }) 
         />
       ) : (
         // Show AddDeliveryPhotos if photos are not submitted
-        <AddDeliveryPhotos
+        <AddReturnPhotos
           orderId={data.id}
           token={token}
           setSubmitted={() => handlePhotosCompletion()}
@@ -174,4 +175,4 @@ const styles = StyleSheet.create({
   smallHeading: {},
 });
 
-export default ProofOfDelivery;
+export default ProofOfReturn;

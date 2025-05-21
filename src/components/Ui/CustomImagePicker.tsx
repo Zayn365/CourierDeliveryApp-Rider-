@@ -3,6 +3,7 @@ import {View, Text, TouchableOpacity, Image, Alert} from 'react-native';
 import {launchCamera, launchImageLibrary} from 'react-native-image-picker';
 import Icons from '@utils/imagePaths/imagePaths';
 import {ImagePicker} from '@assets/css/main';
+import { infoToast } from './CustomToast';
 
 type UploadImageProps = {
   addname: string;
@@ -14,7 +15,8 @@ const UploadDocument: React.FC<UploadImageProps> = ({addname, setData}) => {
   const handleSelectFromGallery = async () => {
     const result = await launchImageLibrary({mediaType: 'photo'});
     if (imageUri.length >= 3) {
-      Alert.alert('Maximum 3 images allowed');
+      infoToast('Maximum 3 images allowed');
+      // Alert.alert('Maximum 3 images allowed');
       return;
     }
     if (result?.assets && result.assets.length > 0) {
@@ -32,7 +34,8 @@ const UploadDocument: React.FC<UploadImageProps> = ({addname, setData}) => {
   const handleOpenCamera = async () => {
     const result = await launchCamera({mediaType: 'photo'});
     if (imageUri.length >= 3) {
-      Alert.alert('Maximum 3 images allowed');
+      infoToast('Maximum 3 images allowed');
+      // Alert.alert('Maximum 3 images allowed');
       return;
     }
     if (result?.assets && result.assets.length > 0) {

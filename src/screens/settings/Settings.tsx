@@ -1,132 +1,20 @@
-// import CustomText from '@components/Ui/CustomText';
-// import React from 'react';
-// import {FlatList} from 'react-native-gesture-handler';
-// import {View, TouchableOpacity, StyleSheet} from 'react-native';
-// import useAuthStore from '@utils/store/authStore';
-// import useMapStore from '@utils/store/mapStore';
-// import CustomIcons from '@utils/imagePaths/customSvgs';
-
-// // type Props = {};
-
-// const Settings = () => {
-//   const {logout, token}: any = useAuthStore();
-//   // const {orders}: any = usePlaceOrder();
-
-//   // const filteredOrders =
-//   //   orders &&
-//   //   orders?.length > 0 &&
-//   //   orders?.filter((val: any) => val.orderStatus <= 6);
-//   const data: any = useMapStore();
-//   const {} = data;
-//   // console.log(
-//   //   'TCL ~ file: Map.tsx:24 ~ currentLocation',
-//   //   currentLocation,
-//   //   ', currentLocation',
-//   //   riderLocation,
-//   //   'Rider',
-//   //   destination,
-//   // );
-//   const menuItems = [
-//     {
-//       id: '1',
-//       title: 'My Profile',
-//       icon: <CustomIcons.ArrowRight color="#465061" />,
-//       onClick: () => {},
-//     },
-//     {
-//       id: '2',
-//       title: 'Contact Operations',
-//       icon: <CustomIcons.CallIcon color="#465061" isBg={false} />,
-//       onClick: () => {},
-//     },
-//     {
-//       id: '4',
-//       title: 'Log out',
-//       icon: <CustomIcons.logOutIcon color="#465061" />,
-//       onClick: () => {
-//         logout(token);
-//       },
-//     },
-//   ];
-//   const renderItem = ({item}: any) => (
-//     <TouchableOpacity onPress={item.onClick} style={styles.itemContainer}>
-//       <CustomText style={styles.itemText}>{item.title}</CustomText>
-//       {item.value && (
-//         <CustomText style={styles.versionText}>{item.value}</CustomText>
-//       )}
-//       <View style={item.id === '2' ? '' : {marginRight: 15}}>
-//         {item.icon && item.icon}
-//       </View>
-//     </TouchableOpacity>
-//   );
-
-//   return (
-//     <View style={styles.container}>
-//       <FlatList
-//         data={menuItems}
-//         keyExtractor={item => item.id}
-//         renderItem={renderItem}
-//         contentContainerStyle={styles.listContainer}
-//       />
-
-//       <CustomText style={styles.AppVersion}>App Version: v2.1</CustomText>
-//     </View>
-//   );
-// };
-// const styles = StyleSheet.create({
-//   container: {
-//     flex: 1,
-//     backgroundColor: '#FFF',
-//     paddingVertical: 20,
-//   },
-//   AppVersion: {
-//     textAlign: 'center',
-//     color: '#46506160',
-//   },
-//   listContainer: {
-//     paddingHorizontal: 16,
-//   },
-//   itemContainer: {
-//     flexDirection: 'row',
-//     alignItems: 'center',
-//     justifyContent: 'space-between',
-//     paddingVertical: 15,
-//     borderBottomWidth: 1,
-//     borderBottomColor: '#E0E0E0',
-//   },
-//   itemText: {
-//     fontSize: 16,
-//     color: '#333',
-//   },
-//   versionText: {
-//     fontSize: 16,
-//     color: '#666',
-//   },
-//   icon: {
-//     width: 20,
-//     height: 20,
-//     tintColor: '#333', // Adjust if needed
-//   },
-// });
-// export default Settings;
-
-
-
-
 import CustomText from '@components/Ui/CustomText';
-import React from 'react';
-import {FlatList} from 'react-native-gesture-handler';
-import {View, TouchableOpacity, StyleSheet} from 'react-native';
+import React, { useState } from 'react';
+import { FlatList } from 'react-native-gesture-handler';
+import { View, TouchableOpacity, StyleSheet } from 'react-native';
 import useAuthStore from '@utils/store/authStore';
 import useMapStore from '@utils/store/mapStore';
 import CustomIcons from '@utils/imagePaths/customSvgs';
 import { useNavigation } from '@react-navigation/native';
+import { errorToast, infoToast, showToast, successToast } from '@components/Ui/CustomToast';
+import CustomModal from '@components/Ui/CustomModal';
 
 // type Props = {};
 
 const Settings = () => {
-  const navigation=useNavigation();
-  const {logout, token}: any = useAuthStore();
+  const [isVisible, setIsVisible] = useState(false);
+  const navigation = useNavigation();
+  const { logout, token }: any = useAuthStore();
   // const {orders}: any = usePlaceOrder();
 
   // const filteredOrders =
@@ -134,7 +22,7 @@ const Settings = () => {
   //   orders?.length > 0 &&
   //   orders?.filter((val: any) => val.orderStatus <= 6);
   const data: any = useMapStore();
-  const {} = data;
+  const { } = data;
   // console.log(
   //   'TCL ~ file: Map.tsx:24 ~ currentLocation',
   //   currentLocation,
@@ -148,30 +36,36 @@ const Settings = () => {
       id: '1',
       title: 'My Profile',
       icon: <CustomIcons.ArrowRight color="#465061" />,
-      onClick: () => {navigation.navigate('Profile')},
+      //@ts-ignore
+      onClick: () => { navigation.navigate('Profile') },
     },
     {
       id: '2',
       title: 'Contact Operations',
       icon: <CustomIcons.CallIcon color="#465061" isBg={false} />,
-      onClick: () => {},
+      onClick: () => { infoToast('Contact Operations') },
     },
     {
       id: '4',
       title: 'Log out',
       icon: <CustomIcons.logOutIcon color="#465061" />,
       onClick: () => {
-        logout(token);
+        // logout(token);
+        setIsVisible(true);
       },
     },
   ];
-  const renderItem = ({item}: any) => (
-    <TouchableOpacity onPress={item.onClick} style={[styles.itemContainer, item.id === '2' ? {paddingVertical: 3} : '']}>
+
+  const handleLogout = () => { logout(token); };
+  const handleCloseModal = () => { setIsVisible(false); };
+
+  const renderItem = ({ item }: any) => (
+    <TouchableOpacity onPress={item.onClick} style={[styles.itemContainer, item.id === '2' ? { paddingVertical: 3 } : '']}>
       <CustomText style={styles.itemText}>{item.title}</CustomText>
       {item.value && (
         <CustomText style={styles.versionText}>{item.value}</CustomText>
       )}
-      <View style={item.id === '1' ? {marginRight: 20 } :item.id === '2' ? '' : {marginRight: 10 }}>
+      <View style={item.id === '1' ? { marginRight: 20 } : item.id === '2' ? '' : { marginRight: 10 }}>
         {item.icon && item.icon}
       </View>
     </TouchableOpacity>
@@ -185,8 +79,14 @@ const Settings = () => {
         renderItem={renderItem}
         contentContainerStyle={styles.listContainer}
       />
-
       <CustomText style={styles.AppVersion}>App Version: v2.1</CustomText>
+      <CustomModal
+        visible={isVisible}
+        title={'Do you want to logout?'}
+        onYesPress={handleLogout}
+        onNoPress={handleCloseModal}
+        onClosePress={handleCloseModal}
+      />
     </View>
   );
 };

@@ -104,4 +104,5 @@ class NativeLocationTracking(reactContext: ReactApplicationContext) : ReactConte
             Log.e(TAG, "Error stopping background tracking: ${e.message}", e)
         }
     }
+    
 }

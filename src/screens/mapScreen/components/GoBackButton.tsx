@@ -1,8 +1,8 @@
 import React from 'react';
 import Animated from 'react-native-reanimated';
-import {homeStyles} from '@assets/css/map';
+import { homeStyles } from '@assets/css/map';
 import Icons from '@utils/imagePaths/imagePaths';
-import {useNavigation} from '@react-navigation/native';
+import { useNavigation } from '@react-navigation/native';
 
 type Prop = {
   currentStep: number;
@@ -26,8 +26,14 @@ const GoBackButton: React.FC<Prop> = ({
       navigation.goBack();
       return;
     } else if (currentStep === 66) {
-      setCurrentStep(3);
-    } else if (currentStep === 55 || currentStep === 77) {
+      // setCurrentStep(3);
+      navigation.goBack();
+      return;
+    } else if (currentStep === 67) {
+      setCurrentStep(66);
+      return;
+    }
+    else if (currentStep === 55 || currentStep === 77) {
       setCurrentStep(2);
     } else {
       prevStep();
@@ -41,7 +47,7 @@ const GoBackButton: React.FC<Prop> = ({
             style={[
               homeStyles.goBackButton,
               // @ts-ignore
-              {bottom: `${snapPoints[bottomSheetPosition]}%`},
+              { bottom: `${snapPoints[bottomSheetPosition]}%` },
             ]}>
             {/* <TouchableOpacity onPress={prevStep}> */}
             <Icons.GoBackIcon onPress={goBack} />

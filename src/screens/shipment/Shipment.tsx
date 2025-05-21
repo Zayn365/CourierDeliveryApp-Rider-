@@ -492,7 +492,7 @@ const Shipment: React.FC = () => {
         <View style={styles.filterSection}>
 
           <View style={styles.filterHeaderContainer}>
-            <ScrollView
+            {filteredOrders.length > 0 && <ScrollView
               horizontal
               showsHorizontalScrollIndicator={false}
               style={[styles.filterHeader, activeFilterCategory && { borderBottomWidth: 0, paddingBottom: 0 }]}
@@ -543,7 +543,9 @@ const Shipment: React.FC = () => {
                   </TouchableOpacity>
                 );
               })}
-            </ScrollView>
+
+            </ScrollView>}
+
             {isFilteringActive && (
               <TouchableOpacity
                 style={styles.clearAllButton}
@@ -594,7 +596,7 @@ const Shipment: React.FC = () => {
         {isFilteringActive && (
           <View style={styles.resultsCountBanner}>
             <Text style={styles.resultsCountText}>
-              {filteredOrders.length} {filteredOrders.length === 1 ? 'result' : 'results'} found
+              {filteredOrders.length} {filteredOrders.length === 1 ? 'result' : 'results'} founds
             </Text>
           </View>
         )}

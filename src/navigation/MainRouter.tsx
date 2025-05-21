@@ -11,6 +11,7 @@ import Home from '../screens/home/Home';
 import ParcelDetailsScreen from '@screens/parcelDetail/ParcelDetail';
 import Deposit from '@screens/deposit/Deposit';
 import Profile from '@screens/profile/Profile';
+import LocationRequirementsScreen from '@screens/locationRequirements/LocationRequirementsScreen';
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
@@ -78,7 +79,8 @@ const MainRouter = () => {
       <Stack.Screen name="MainTabs" component={MainTabs} />
       <Stack.Screen name="ParcelDetails" component={ParcelDetailsScreen} />
       <Stack.Screen name="Profile" component={Profile} />
-
+      {/* @ts-ignore */}
+      <Stack.Screen name="LocationRequirementsScreen" component={LocationRequirementsScreen} />
     </Stack.Navigator>
   );
 };

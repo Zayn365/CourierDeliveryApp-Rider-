@@ -8,6 +8,7 @@ import Bubbles from '@assets/images/bgImages/bubbles.svg';
 import CustomText from '@components/Ui/CustomText';
 import {RootStackParamList} from '@utils/types/types';
 import useAuthStore from '@utils/store/authStore';
+import { infoToast } from '@components/Ui/CustomToast';
 
 type VerifyScreenRouteProp = RouteProp<RootStackParamList, 'Verify'>;
 type SignInRouteProp = RouteProp<RootStackParamList, 'SignIn'>;
@@ -49,7 +50,8 @@ const VerifyScreen: React.FC = () => {
       setTime(30);
       setTries(tries - 1);
     } else {
-      Alert.alert('You have Reached the maximum number of attempts');
+      infoToast('You have reached the maximum number of attempts');
+      // Alert.alert('You have Reached the maximum number of attempts');
     }
   };
   return (

@@ -49,13 +49,12 @@ import Check from '@assets/images/icons/check.svg';
 // import Printer from '@assets/images/icons/printer0.png';
 const Printer = require('@assets/images/icons/printer.png');
 const pickUp = require('@assets/images/icons/CurrentNew48.png');
-const rider = require('@assets/images/icons/riderNew48.png');
+const rider1 = require('@assets/images/icons/riderNew48.png');
+const rider = require('@assets/images/icons/Courier_Icon.png');
 const destination = require('@assets/images/icons/destinationNew48.png');
 const file = require('@assets/images/icons/file.png');
 const ProfileAvatar = require('@assets/images/icons/profileAvatar2.png');
-
-
-
+import ThankYouGreen from '@assets/images/icons/ThankYouGreen.svg';
 
 
 const Icons = {
@@ -111,7 +110,9 @@ const Icons = {
   EyeClose,
   Printer,
   Check,
-  ProfileAvatar
+  ProfileAvatar,
+  rider1,
+  ThankYouGreen,
 };
 
 export default Icons;

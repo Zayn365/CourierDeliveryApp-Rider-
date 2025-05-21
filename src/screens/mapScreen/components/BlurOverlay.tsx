@@ -9,7 +9,7 @@ type Prop = {
 const BlurOverlay: React.FC<Prop> = ({currentStep}) => {
   return (
     <>
-      {currentStep >= 4 && (
+      {currentStep >= 4 && currentStep != 66 && (
         <>
           <Animated.View style={[homeStyles.overlayBg]} />
         </>

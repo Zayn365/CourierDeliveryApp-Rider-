@@ -26,7 +26,7 @@ type Props = {
   orderId?: number;
 };
 
-const AddDeliveryPhotos: React.FC<Props> = ({
+const AddReturnPhotos: React.FC<Props> = ({
   setSubmitted,
   imageUri,
   setImageUri,
@@ -109,7 +109,7 @@ const AddDeliveryPhotos: React.FC<Props> = ({
     setLoading(true);
     const proofData = {
       orderId: orderId,
-      type: 'Proof',
+      type: 'Proof-Return',
       images: images,
       token: token,
     };
@@ -135,7 +135,7 @@ const AddDeliveryPhotos: React.FC<Props> = ({
     <View style={{paddingHorizontal: 10}}>
       <View style={homeStyles.pickupTop}>
         <CustomText isBold={true} style={homeStyles.heading}>
-          Add Delivery Location Photos
+          Add Return Location Photos
         </CustomText>
       </View>
       <View style={styles.container}>
@@ -209,4 +209,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default AddDeliveryPhotos;
+export default AddReturnPhotos;

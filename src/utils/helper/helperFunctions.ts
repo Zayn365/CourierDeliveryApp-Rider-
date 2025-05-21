@@ -1,4 +1,4 @@
-import {Alert, Linking, Share} from 'react-native';
+import { Alert, Linking, Share } from 'react-native';
 import {
   CalculationTypeEnum,
   OrderStatusEnum,
@@ -6,9 +6,9 @@ import {
   PaymentFromEnum,
   PaymentTypeEnum,
 } from '../enums/enum';
-import {Dimensions} from 'react-native';
+import { Dimensions } from 'react-native';
 
-const {width, height} = Dimensions.get('window');
+const { width, height } = Dimensions.get('window');
 
 // Export width and height
 export const SCREEN_WIDTH = width;
@@ -36,6 +36,8 @@ export function getOrderStatusText(status: number): string {
       return 'Disputed';
     case OrderStatusEnum.OUT_FOR_PICKUP:
       return 'Out For Pickup';
+    case OrderStatusEnum.RETURN_IN_PROGRESS:
+      return 'Return In Progress';
     default:
       return 'Unknown Status';
   }
@@ -53,9 +55,30 @@ export const getOrderStatusColor = (orderStatus: number) => {
     [OrderStatusEnum.CANCELLED]: '#DC3545', // Dark Red
     [OrderStatusEnum.DISPUTED]: '#17A2B8', // Teal
     [OrderStatusEnum.OUT_FOR_PICKUP]: '#6610F2', // Purple
+    [OrderStatusEnum.RETURN_IN_PROGRESS]: '#8910B1', // Purple
+
   };
 
   return statusColors[orderStatus] || '#000000'; // Default to black if status not found
+};
+
+export const getOrderStatusBackgroundColor = (orderStatus: number) => {
+  const statusColors: any = {
+    [OrderStatusEnum.PENDING]: '#FFA50026', // Orange
+    [OrderStatusEnum.ASSIGNED]: '#FF000026', // Red
+    [OrderStatusEnum.PICKED_UP]: '#FF336626', // Pinkish Red
+    [OrderStatusEnum.IN_TRANSIT]: '#007BFF26', // Blue
+    [OrderStatusEnum.OUT_FOR_DELIVERY]: '#FFC10726', // Yellow
+    [OrderStatusEnum.DELIVERED]: '#28A74526', // Green
+    [OrderStatusEnum.RETURNED]: '#6C757D26', // Gray
+    [OrderStatusEnum.CANCELLED]: '#DC354526', // Dark Red
+    [OrderStatusEnum.DISPUTED]: '#17A2B826', // Teal
+    [OrderStatusEnum.OUT_FOR_PICKUP]: '#6610F226', // Purple
+    [OrderStatusEnum.RETURN_IN_PROGRESS]: '#8910B126', // Purple
+
+  };
+
+  return statusColors[orderStatus] || '#00000026'; // Default to black if status not found
 };
 
 export function getParcelTypeText(type: number): string {
@@ -170,7 +193,7 @@ export function formatDate(dateString: string) {
   const date = new Date(dateString);
   const day = String(date.getUTCDate()).padStart(2, '0');
   const month = date
-    .toLocaleString('en-US', {month: 'short', timeZone: 'UTC'})
+    .toLocaleString('en-US', { month: 'short', timeZone: 'UTC' })
     .toUpperCase();
   const year = String(date.getUTCFullYear()).slice(-2);
   return `${day} ${month} ${year}`;
@@ -185,6 +208,19 @@ export function formatTime(dateString: string) {
       hour12: true,
       // timeZone: 'UTC',
       timeZone: 'Asia/Karachi',
+    })
+    .replace(/^0/, ''); // Remove leading zero from hour if present
+}
+
+export function formatTime2(dateString: string) {
+  const date = new Date(dateString);
+  return date
+    .toLocaleString('en-US', {
+      hour: '2-digit',
+      minute: '2-digit',
+      hour12: true,
+      timeZone: 'UTC',
+      // timeZone: 'Asia/Karachi',
     })
     .replace(/^0/, ''); // Remove leading zero from hour if present
 }

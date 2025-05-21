@@ -8,6 +8,7 @@ import {RouteProp, useNavigation, useRoute} from '@react-navigation/native';
 import CustomText from '@components/Ui/CustomText';
 import useAuthStore from '@utils/store/authStore';
 import {RootStackParamList} from '@utils/types/types';
+import { errorToast } from '@components/Ui/CustomToast';
 type VerifyScreenRouteProp = RouteProp<RootStackParamList, 'ChangePassword'>;
 
 const ChangePassword = () => {
@@ -22,26 +23,31 @@ const ChangePassword = () => {
   const onSignInPressed = async () => {
     try {
       if (!newPassword) {
-        Alert.alert('Error', 'Please Enter a Password number');
+        errorToast('Please Enter a Password');
+        // Alert.alert('Error', 'Please Enter a Password number');
         return;
       }
       if (!confirmPassword) {
-        Alert.alert('Error', 'Please enter a same Password');
+        errorToast('Please enter the Confirm Password');
+        // Alert.alert('Error', 'Please enter a same Password');
         return;
       }
       if (confirmPassword !== newPassword) {
-        Alert.alert('Error', 'Please enter a same Password');
+        errorToast('Please enter the same Password');
+        // Alert.alert('Error', 'Please enter the same Password');
         return;
       }
       const verify = await verifyForgetPassword(email, otp, newPassword);
       if (verify) {
-        Alert.alert('Password Changed Successfully');
+        errorToast('Password Changed Successfully');
+        // Alert.alert('Password Changed Successfully');
         navigation.navigate('SignIn');
       }
       console.log(verify);
     } catch (error) {
-      console.error('ChangePassord error:', error);
-      Alert.alert('Error', 'Something went wrong during ChangePassword');
+      errorToast('Something went wrong during ChangePassword');
+      // console.error('ChangePassord error:', error);
+      // Alert.alert('Error', 'Something went wrong during ChangePassword');
     }
   };
 

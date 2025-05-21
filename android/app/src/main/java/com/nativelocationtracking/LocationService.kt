@@ -46,46 +46,23 @@ class LocationService : Service() {
         Log.d(TAG, "Service onCreate called")
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
         locationCallback = object : LocationCallback() {
-            override fun onLocationResult(locationResult: LocationResult) {
-                val location = locationResult.lastLocation ?: run {
-                    Log.w(TAG, "Location result was null")
-                    return
-                }
-                
-                Log.d(TAG, "RAW LOCATION UPDATE: lat=${location.latitude}, lon=${location.longitude}, accuracy=${location.accuracy}m, provider=${location.provider}, time=${location.time}")
-                
-                // Filter out low-accuracy updates
-                if (location.accuracy > MAX_ACCURACY) {
-                    Log.w(TAG, "Accuracy too low (${location.accuracy}m), skipping update")
-                    return
-                }
-                
-                // Compare with previous location
-                if (previousLocation != null) {
-                    val distance = previousLocation!!.distanceTo(location)
-                    Log.d(TAG, "Distance from previous location: $distance meters")
-                    
-                    if (distance < MINIMUM_DISTANCE) {
-                        Log.d(TAG, "Movement too small ($distance m), skipping update")
-                        return
-                    }
-                    
-                    if (location.latitude == previousLocation!!.latitude && 
-                        location.longitude == previousLocation!!.longitude) {
-                        Log.w(TAG, "WARNING: Received identical coordinates to previous location!")
-                        return
-                    }
-                }
-                
-                // Calculate heading
-                val heading = calculateHeading(previousLocation, location)
-                
-                // Upload location with heading
-                uploadLocationToFirebase(location, heading)
-                
-                // Update previous location
-                previousLocation = location
-            }
+    override fun onLocationResult(locationResult: LocationResult) {
+    val location = locationResult.lastLocation ?: run {
+        Log.w(TAG, "Location result was null")
+        return
+    }
+    
+    Log.d(TAG, "RAW LOCATION UPDATE: lat=${location.latitude}, lon=${location.longitude}, accuracy=${location.accuracy}m, provider=${location.provider}, time=${location.time}")
+    
+    // Calculate heading using the previous location
+    val heading = calculateHeading(previousLocation, location)
+    
+    // Upload location with heading
+    uploadLocationToFirebase(location, heading)
+    
+    // Update previous location for the next calculation
+    previousLocation = location
+}
         }
         Log.d(TAG, "Service created")
     }

@@ -30,6 +30,7 @@ const App: React.FC = () => {
   const navigation = useNavigation();
 
   "==================================================================="
+  
   // modified the useEffect to ensure bottom sheet is properly positioned
   useEffect(() => {
     // Make sure this runs after navigation completes
@@ -37,7 +38,7 @@ const App: React.FC = () => {
       if (bottomSheetRef.current) {
         // Force update bottom sheet position
         const index =
-          currentStep === 2 || currentStep === 5 || currentStep === 6
+          currentStep === 2 || currentStep === 5 || currentStep === 6 || currentStep === 66 || currentStep === 67
             ? 3
             : currentStep === 4
               ? 3
@@ -75,8 +76,7 @@ useEffect(() => {
 }, [navigation, param, token]);
   "==================================================================="
 
-  const filteredOrders =
-    param && orders && orders.find((val: any) => val.id === param.currentOrder);
+  const filteredOrders =  param && orders && orders.find((val: any) => val.id === param.currentOrder);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -89,7 +89,7 @@ useEffect(() => {
   const prevStep = () => setCurrentStep(Math.max(currentStep - 1, 1));
 
   const currentIndex =
-    currentStep === 2 || currentStep === 5 || currentStep === 6
+    currentStep === 2 || currentStep === 5 || currentStep === 6 || currentStep === 66 || currentStep === 67
       ? 3
       : currentStep === 4
         ? 3

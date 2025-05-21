@@ -9,6 +9,7 @@ export const OrderStatusEnum = Object.freeze({
   CANCELLED: 8,
   DISPUTED: 9,
   OUT_FOR_PICKUP: 10,
+  RETURN_IN_PROGRESS: 11,
 });
 
 // Parcel Type Enum
